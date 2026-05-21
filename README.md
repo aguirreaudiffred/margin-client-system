@@ -29,30 +29,16 @@ npm run preview
 
 La UI proviene de `margin-system.jsx`. Los datos de ejemplo van embebidos en `src/App.jsx`.
 
-## Web pública (Vercel) — 2 minutos
+## Web pública
 
-El repo ya incluye `vercel.json`. Conéctalo una vez en Vercel:
+**URL en vivo:** https://aguirreaudiffred.github.io/margin-client-system/
 
-1. Abre [vercel.com/new](https://vercel.com/new) e inicia sesión.
-2. **Import Git Repository** → elige `aguirreaudiffred/margin-client-system`.
-3. Deja **Framework Preset: Vite** (detectado solo).
-4. **Deploy** (sin cambiar `Build Command` ni `Output Directory`).
+Sitio estático publicado desde la rama `gh-pages` (GitHub Pages). Tras cambios en la app:
 
-Cuando termine, Vercel te da una URL tipo:
-
-**https://margin-client-system.vercel.app**
-
-Cada `git push` a `main` vuelve a publicar la app.
-
-### PDF / Claude (opcional)
-
-Vercel → proyecto → **Settings** → **Environment Variables**:
-
-| Name | Value |
-|------|--------|
-| `VITE_ANTHROPIC_API_KEY` | tu key de Anthropic |
-
-Guarda y **Redeploy** el último deployment.
+```bash
+npm run build -- --base=/margin-client-system/
+# publicar contenido de dist/ en la rama gh-pages
+```
 
 ## Repositorio
 
