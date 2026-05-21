@@ -254,8 +254,8 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
       <div style={{borderBottom:"1px solid #0e0e1c",display:"flex",alignItems:"stretch",justifyContent:"space-between",paddingRight:16,flexWrap:"wrap"}}>
         <div style={{display:"flex",alignItems:"stretch",flexWrap:"wrap"}}>
           <div style={{padding:"11px 18px",borderRight:"1px solid #0e0e1c",display:"flex",flexDirection:"column",justifyContent:"center"}}>
-            <div style={{fontFamily:"'Syne',sans-serif",fontSize:15,fontWeight:900}}>
-              <span style={{color:"#f0a500"}}>MARGIN</span><span style={{color:"#d8d4c8"}}>OS</span>
+            <div style={{fontFamily:"'Syne',sans-serif",fontSize:13,fontWeight:900,lineHeight:1.2}}>
+              <span style={{color:"#d8d4c8"}}>Margin & Client </span><span style={{color:"#f0a500"}}>Sistem</span>
             </div>
             <div style={{fontSize:7,letterSpacing:3,color:"#181826",marginTop:1}}>FORMEXA USA LLC</div>
           </div>
@@ -280,7 +280,7 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
 
         {/* DASHBOARD */}
         {tab==="dash"&&<div className="fade">
-          <div className="slbl">Formexa USA · Ene–May 2026</div>
+          <div className="slbl">Margin & Client Sistem · Ene–May 2026</div>
           {costsN===0&&<div className="ni" style={{marginBottom:16,display:"flex",gap:10,alignItems:"center"}}>
             <span>💡</span>
             <div>Carga el PDF de compras Alpha para ver márgenes reales. <button className="ghost" style={{padding:"2px 9px",fontSize:7.5,marginLeft:8}} onClick={()=>setTab("costos")}>Cargar →</button></div>
