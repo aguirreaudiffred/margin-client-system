@@ -29,21 +29,30 @@ npm run preview
 
 La UI proviene de `margin-system.jsx`. Los datos de ejemplo van embebidos en `src/App.jsx`.
 
-## Web (producción)
+## Web pública (Vercel) — 2 minutos
 
-App desplegada en Vercel (cualquiera con el link puede abrirla):
+El repo ya incluye `vercel.json`. Conéctalo una vez en Vercel:
+
+1. Abre [vercel.com/new](https://vercel.com/new) e inicia sesión.
+2. **Import Git Repository** → elige `aguirreaudiffred/margin-client-system`.
+3. Deja **Framework Preset: Vite** (detectado solo).
+4. **Deploy** (sin cambiar `Build Command` ni `Output Directory`).
+
+Cuando termine, Vercel te da una URL tipo:
 
 **https://margin-client-system.vercel.app**
 
-(Puede tardar 1–2 min tras un push si el deploy automático está activo.)
+Cada `git push` a `main` vuelve a publicar la app.
 
-### Variables en Vercel (opcional)
+### PDF / Claude (opcional)
 
-Para importar PDFs con Claude, en el proyecto Vercel → Settings → Environment Variables:
+Vercel → proyecto → **Settings** → **Environment Variables**:
 
-- `VITE_ANTHROPIC_API_KEY` = tu API key de Anthropic
+| Name | Value |
+|------|--------|
+| `VITE_ANTHROPIC_API_KEY` | tu key de Anthropic |
 
-Luego redeploy.
+Guarda y **Redeploy** el último deployment.
 
 ## Repositorio
 
