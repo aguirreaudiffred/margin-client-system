@@ -1,4 +1,4 @@
-# Margin & Client Sistem
+# Margin & Client System
 
 Dashboard de márgenes, pedidos confirmados, catálogo de productos y vendedores (Formexa). Proyecto **independiente** de Sharp Picks / ClaudeCode.
 
@@ -10,7 +10,7 @@ Dashboard de márgenes, pedidos confirmados, catálogo de productos y vendedores
 ## Desarrollo local
 
 ```bash
-cd margin-client-sistem
+cd margin-client-system
 npm install
 cp .env.example .env.local   # opcional: VITE_ANTHROPIC_API_KEY para importar PDFs
 npm run dev
