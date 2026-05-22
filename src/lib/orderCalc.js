@@ -1,5 +1,4 @@
 import {
-  MAX_CIRCULATION_LBS,
   productWeightKg,
   productWeightLbs,
   kgFromLbs,
@@ -7,7 +6,9 @@ import {
   fmtLbs,
 } from "./weightUnits.js";
 
-export { MAX_CIRCULATION_LBS, fmtKg, fmtLbs };
+/** Límite de circulación en EU (lbs por pedido / embarque). */
+export const MAX_CIRCULATION_LBS = 44000;
+export { fmtKg, fmtLbs };
 
 export function lineWeightLbs(item, prods) {
   const p = prods.find((x) => x.sku === item.sku);
