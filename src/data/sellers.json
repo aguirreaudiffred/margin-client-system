@@ -1,0 +1,16 @@
+[
+  {
+    "id": "s1",
+    "name": "Luis Miguel Perez",
+    "zone": "Texas",
+    "email": "l.perez@formexa.mx",
+    "av": "LP"
+  },
+  {
+    "id": "s2",
+    "name": "Manuel Fernandez",
+    "zone": "Texas",
+    "email": "m.fernandez@formexa.mx",
+    "av": "MF"
+  }
+]

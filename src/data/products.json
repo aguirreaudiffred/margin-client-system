@@ -7,7 +7,9 @@
     "category": "DETERGENTE",
     "brand": "ARIEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p2",
@@ -17,7 +19,9 @@
     "category": "DETERGENTE",
     "brand": "ARIEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p3",
@@ -27,7 +31,9 @@
     "category": "DETERGENTE",
     "brand": "ARIEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p4",
@@ -37,7 +43,9 @@
     "category": "DETERGENTE",
     "brand": "ARIEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p5",
@@ -47,7 +55,9 @@
     "category": "DETERGENTE",
     "brand": "ARIEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p6",
@@ -57,7 +67,9 @@
     "category": "DETERGENTE",
     "brand": "ARIEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p7",
@@ -67,7 +79,9 @@
     "category": "DETERGENTE",
     "brand": "ARIEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p8",
@@ -77,7 +91,9 @@
     "category": "DETERGENTE",
     "brand": "ACE",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p9",
@@ -87,7 +103,9 @@
     "category": "DETERGENTE",
     "brand": "ACE",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p10",
@@ -97,7 +115,9 @@
     "category": "DETERGENTE",
     "brand": "ACE",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p11",
@@ -107,7 +127,9 @@
     "category": "DETERGENTE",
     "brand": "ARIEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p12",
@@ -117,7 +139,9 @@
     "category": "DETERGENTE",
     "brand": "ARIEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p13",
@@ -127,7 +151,9 @@
     "category": "DETERGENTE",
     "brand": "ARIEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p14",
@@ -137,7 +163,9 @@
     "category": "DETERGENTE",
     "brand": "ARIEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p15",
@@ -147,7 +175,9 @@
     "category": "DETERGENTE",
     "brand": "PERSIL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p16",
@@ -157,7 +187,9 @@
     "category": "DETERGENTE",
     "brand": "PERSIL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p17",
@@ -167,7 +199,9 @@
     "category": "DETERGENTE",
     "brand": "PERSIL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p18",
@@ -177,7 +211,9 @@
     "category": "DETERGENTE",
     "brand": "PERSIL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p19",
@@ -187,7 +223,9 @@
     "category": "DETERGENTE",
     "brand": "SALVO",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p20",
@@ -197,7 +235,9 @@
     "category": "SUAVIZANTE",
     "brand": "DOWNY",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p21",
@@ -207,7 +247,9 @@
     "category": "SUAVIZANTE",
     "brand": "DOWNY",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p22",
@@ -217,7 +259,9 @@
     "category": "SUAVIZANTE",
     "brand": "DOWNY",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p23",
@@ -227,7 +271,9 @@
     "category": "SUAVIZANTE",
     "brand": "DOWNY",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p24",
@@ -237,7 +283,9 @@
     "category": "SUAVIZANTE",
     "brand": "DOWNY",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p25",
@@ -247,7 +295,9 @@
     "category": "SUAVIZANTE",
     "brand": "DOWNY",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p26",
@@ -257,7 +307,9 @@
     "category": "SUAVIZANTE",
     "brand": "DOWNY",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p27",
@@ -267,7 +319,9 @@
     "category": "SUAVIZANTE",
     "brand": "DOWNY",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p28",
@@ -277,7 +331,9 @@
     "category": "SUAVIZANTE",
     "brand": "DOWNY",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p29",
@@ -287,7 +343,9 @@
     "category": "SUAVIZANTE",
     "brand": "DOWNY",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p30",
@@ -297,7 +355,9 @@
     "category": "SUAVIZANTE",
     "brand": "DOWNY",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p31",
@@ -307,7 +367,9 @@
     "category": "SUAVIZANTE",
     "brand": "DOWNY",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p32",
@@ -317,7 +379,9 @@
     "category": "SUAVIZANTE",
     "brand": "DOWNY",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p33",
@@ -327,7 +391,9 @@
     "category": "SUAVIZANTE",
     "brand": "DOWNY",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p34",
@@ -337,7 +403,9 @@
     "category": "SUAVIZANTE",
     "brand": "SUAVITEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p35",
@@ -347,7 +415,9 @@
     "category": "SUAVIZANTE",
     "brand": "SUAVITEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p36",
@@ -357,7 +427,9 @@
     "category": "SUAVIZANTE",
     "brand": "SUAVITEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p37",
@@ -367,7 +439,9 @@
     "category": "SUAVIZANTE",
     "brand": "SUAVITEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p38",
@@ -377,7 +451,9 @@
     "category": "SUAVIZANTE",
     "brand": "SUAVITEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p39",
@@ -387,7 +463,9 @@
     "category": "SUAVIZANTE",
     "brand": "SUAVITEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p40",
@@ -397,7 +475,9 @@
     "category": "SUAVIZANTE",
     "brand": "SUAVITEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p41",
@@ -407,7 +487,9 @@
     "category": "SUAVIZANTE",
     "brand": "SUAVITEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p42",
@@ -417,7 +499,9 @@
     "category": "SUAVIZANTE",
     "brand": "SUAVITEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p43",
@@ -427,7 +511,9 @@
     "category": "SUAVIZANTE",
     "brand": "SUAVITEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p44",
@@ -437,7 +523,9 @@
     "category": "SUAVIZANTE",
     "brand": "SUAVITEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p45",
@@ -447,7 +535,9 @@
     "category": "SUAVIZANTE",
     "brand": "SUAVITEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p46",
@@ -457,7 +547,9 @@
     "category": "SUAVIZANTE",
     "brand": "SUAVITEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p47",
@@ -467,7 +559,9 @@
     "category": "SUAVIZANTE",
     "brand": "SUAVITEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p48",
@@ -477,7 +571,9 @@
     "category": "SUAVIZANTE",
     "brand": "SUAVITEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p49",
@@ -487,7 +583,9 @@
     "category": "SUAVIZANTE",
     "brand": "SUAVITEL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p50",
@@ -497,7 +595,9 @@
     "category": "LAVATRASTE",
     "brand": "AXION",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p51",
@@ -507,7 +607,9 @@
     "category": "LAVATRASTE",
     "brand": "AXION",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p52",
@@ -517,7 +619,9 @@
     "category": "LAVATRASTE",
     "brand": "AXION",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p53",
@@ -527,7 +631,9 @@
     "category": "LAVATRASTE",
     "brand": "AXION",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p54",
@@ -537,7 +643,9 @@
     "category": "LAVATRASTE",
     "brand": "AXION",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p55",
@@ -547,7 +655,9 @@
     "category": "LAVATRASTE",
     "brand": "SALVO",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p56",
@@ -557,7 +667,9 @@
     "category": "LAVATRASTE",
     "brand": "SALVO",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p57",
@@ -567,7 +679,9 @@
     "category": "LAVATRASTE",
     "brand": "SALVO",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p58",
@@ -577,7 +691,9 @@
     "category": "LAVATRASTE",
     "brand": "SALVO",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p59",
@@ -587,7 +703,9 @@
     "category": "LAVATRASTE",
     "brand": "SALVO",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p60",
@@ -597,7 +715,9 @@
     "category": "LAVATRASTE",
     "brand": "SALVO",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p61",
@@ -607,7 +727,9 @@
     "category": "LAVATRASTE",
     "brand": "SALVO",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p62",
@@ -617,7 +739,9 @@
     "category": "LAVATRASTE",
     "brand": "AXION",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p63",
@@ -627,7 +751,9 @@
     "category": "ACONDICIONADOR",
     "brand": "SAVILE",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p64",
@@ -637,7 +763,9 @@
     "category": "ACONDICIONADOR",
     "brand": "SAVILE",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p65",
@@ -647,7 +775,9 @@
     "category": "SHAMPOO",
     "brand": "SAVILE",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p66",
@@ -657,7 +787,9 @@
     "category": "SHAMPOO",
     "brand": "SAVILE",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p67",
@@ -667,7 +799,9 @@
     "category": "SHAMPOO",
     "brand": "SAVILE",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p68",
@@ -677,7 +811,9 @@
     "category": "SHAMPOO",
     "brand": "SAVILE",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p69",
@@ -687,7 +823,9 @@
     "category": "SHAMPOO",
     "brand": "SAVILE",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p70",
@@ -697,7 +835,9 @@
     "category": "SHAMPOO",
     "brand": "SAVILE",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p71",
@@ -707,7 +847,9 @@
     "category": "SHAMPOO",
     "brand": "SAVILE",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p72",
@@ -717,7 +859,9 @@
     "category": "SHAMPOO",
     "brand": "SAVILE",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p73",
@@ -727,7 +871,9 @@
     "category": "SHAMPOO",
     "brand": "SAVILE",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p74",
@@ -737,7 +883,9 @@
     "category": "SHAMPOO",
     "brand": "SAVILE",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p75",
@@ -747,7 +895,9 @@
     "category": "SHAMPOO",
     "brand": "SAVILE",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p76",
@@ -757,7 +907,9 @@
     "category": "CREMA PEINAR",
     "brand": "SEDAL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p77",
@@ -767,7 +919,9 @@
     "category": "CREMA PEINAR",
     "brand": "SEDAL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p78",
@@ -777,7 +931,9 @@
     "category": "CREMA PEINAR",
     "brand": "SEDAL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p79",
@@ -787,7 +943,9 @@
     "category": "CREMA PEINAR",
     "brand": "SEDAL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p80",
@@ -797,7 +955,9 @@
     "category": "SHAMPOO",
     "brand": "SEDAL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   },
   {
     "id": "p81",
@@ -807,6 +967,8 @@
     "category": "SHAMPOO",
     "brand": "SEDAL",
     "costMXN": 0,
-    "lastUpdated": null
+    "lastUpdated": null,
+    "weightLbs": 0,
+    "weightNote": "lbs por caja"
   }
 ]

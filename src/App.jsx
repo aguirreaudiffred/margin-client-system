@@ -1,6 +1,12 @@
 import{useState,useRef,useEffect,useCallback}from"react";
 import productsSeed from "./data/products.json";
 import ordersSeed from "./data/orders.json";
+import sellersSeed from "./data/sellers.json";
+import{enrichOrderResult,MAX_CIRCULATION_LBS}from"./lib/orderCalc.js";
+
+const LS={orders:"mcs_orders",products:"mcs_products",sellers:"mcs_sellers"};
+const loadLS=(key,fallback)=>{try{const r=localStorage.getItem(key);if(r)return JSON.parse(r);}catch(e){}return fallback;};
+const fmtLbs=n=>`${(n||0).toLocaleString("en-US",{maximumFractionDigits:0})} lbs`;
 
 
 const fU=n=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:2}).format(n||0);
@@ -14,12 +20,21 @@ const MN=["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic
 const ZN=["Texas","California","Florida","Arizona","New Mexico","Nevada"];
 const XR_API="https://api.frankfurter.app/latest?from=USD&to=MXN";
 
-const SELLERS=[
-  {id:"s1",name:"Carlos Mendoza",zone:"Texas",email:"c.mendoza@formexa.mx",av:"CM"},
-  {id:"s2",name:"Laura Vega",zone:"Texas",email:"l.vega@formexa.mx",av:"LV"},
-  {id:"s3",name:"Roberto Solis",zone:"Texas",email:"r.solis@formexa.mx",av:"RS"},
-  {id:"s4",name:"Patricia Ríos",zone:"Texas",email:"p.rios@formexa.mx",av:"PR"},
-];
+const WeightBanner=({summary})=>{
+  if(!summary)return null;
+  const pct=Math.min(100,(summary.weightPct||0)*100);
+  const st=summary.weightStatus||"unknown";
+  const bar=st==="over"?"#ff3c3c":st==="under"?"#6c8dfa":st==="ok"?"#00c896":"#f0a500";
+  const box=st==="over"?"nr":st==="under"?"nb":st==="ok"?"ng":"ni";
+  return(<div className={box} style={{marginBottom:12}}>
+    <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",flexWrap:"wrap",gap:8,marginBottom:8}}>
+      <div><b>PESO EU</b> · {fmtLbs(summary.totalWeightLbs)} / {fmtLbs(summary.maxWeightLbs||MAX_CIRCULATION_LBS)}</div>
+      <div style={{fontSize:9,color:bar}}>{pct.toFixed(1)}% capacidad</div>
+    </div>
+    <div className="mb" style={{height:6,marginBottom:8}}><div className="mf" style={{width:`${pct}%`,height:6,background:bar,borderRadius:2}}/></div>
+    <div style={{fontSize:8.5,lineHeight:1.45}}>{summary.weightMessage}</div>
+  </div>);
+};
 
 async function callClaude(prompt,pdf_b64=null){
   const content=pdf_b64
@@ -42,9 +57,9 @@ const Tip=({active,payload,label})=>{
 
 export default function App(){
   const[tab,setTab]=useState("dash");
-  const[prods,setProds]=useState(productsSeed);
-  const[sellers,setSellers]=useState(SELLERS);
-  const[orders,setOrders]=useState(ordersSeed);
+  const[prods,setProds]=useState(()=>loadLS(LS.products,productsSeed));
+  const[sellers,setSellers]=useState(()=>loadLS(LS.sellers,sellersSeed));
+  const[orders,setOrders]=useState(()=>loadLS(LS.orders,ordersSeed));
   const[R,setR]=useState(null);
   const[xr,setXr]=useState(17.15);
   const[xrLoad,setXrLoad]=useState(false);
@@ -55,7 +70,9 @@ export default function App(){
   const[oErr,setOErr]=useState(null);
   const[drag,setDrag]=useState(false);
   const[txt,setTxt]=useState("");
+  const[pedidoSellerId,setPedidoSellerId]=useState("");
   const fRef=useRef();
+  const wRef=useRef();
   // confirm
   const[showC,setShowC]=useState(false);
   const[cData,setCData]=useState({sellerId:"",client:"",zone:""});
@@ -70,7 +87,7 @@ export default function App(){
   // catalog
   const[eProd,setEProd]=useState(null);
   const[showAP,setShowAP]=useState(false);
-  const[nProd,setNProd]=useState({sku:"",name:"",costMXN:"",listPriceUSD:"",category:"",brand:""});
+  const[nProd,setNProd]=useState({sku:"",name:"",costMXN:"",listPriceUSD:"",category:"",brand:"",weightLbs:""});
   const[catSrch,setCatSrch]=useState("");
   const[catCat,setCatCat]=useState("all");
   // sellers
@@ -88,6 +105,22 @@ export default function App(){
   useEffect(()=>{
     if(!R)import("recharts").then(setR);
   },[R]);
+
+  useEffect(()=>{
+    try{
+      if(localStorage.getItem("mcs_version")!=="2"){
+        localStorage.setItem("mcs_version","2");
+        localStorage.setItem(LS.sellers,JSON.stringify(sellersSeed));
+        localStorage.setItem(LS.orders,JSON.stringify(ordersSeed));
+        setSellers(sellersSeed);
+        setOrders(ordersSeed);
+      }
+    }catch(e){}
+  },[]);
+
+  useEffect(()=>{try{localStorage.setItem(LS.products,JSON.stringify(prods));}catch(e){}},[prods]);
+  useEffect(()=>{try{localStorage.setItem(LS.sellers,JSON.stringify(sellers));}catch(e){}},[sellers]);
+  useEffect(()=>{try{localStorage.setItem(LS.orders,JSON.stringify(orders));}catch(e){}},[orders]);
 
   useEffect(()=>{
     if(cData.sellerId){const s=sellers.find(x=>x.id===cData.sellerId);if(s)setCData(d=>({...d,zone:s.zone}));}
@@ -115,8 +148,8 @@ export default function App(){
   const doAnalyze=async(input)=>{
     setOErr(null);setORes(null);setOLoad(true);
     try{
-      const pl=prods.map(p=>`${p.sku}|${p.name}|lista:$${p.listPriceUSD}|costo:$${p.costMXN}MXN`).join("\n");
-      const prompt=`Sistema márgenes Formexa USA. TC:1 USD=${xr} MXN.
+      const pl=prods.map(p=>`${p.sku}|${p.name}|lista:$${p.listPriceUSD}|costo:$${p.costMXN}MXN|peso:${p.weightLbs||0}lbs/caja`).join("\n");
+      const prompt=`Sistema márgenes Formexa USA. TC:1 USD=${xr} MXN. Límite peso EU: ${MAX_CIRCULATION_LBS} lbs por pedido.
 CATALOGO:
 ${pl}
 PEDIDO:
@@ -124,7 +157,8 @@ ${input}
 SOLO JSON:
 {"orderItems":[{"sku":"","productName":"","matchedProduct":"","quantity":1,"clientPriceUSD":0,"listPriceUSD":0,"costMXN":0,"costUSD":0,"marginUSD":0,"marginPct":0,"alert":false}],"summary":{"totalRevenueUSD":0,"totalCostUSD":0,"totalMarginUSD":0,"totalMarginPct":0,"hasAlerts":false,"recommendation":""},"unmatched":[]}`;
       const raw=await callClaude(prompt);
-      setORes(JSON.parse(raw.replace(/\`\`\`json|\`\`\`/g,"").trim()));
+      const parsed=JSON.parse(raw.replace(/\`\`\`json|\`\`\`/g,"").trim());
+      setORes(enrichOrderResult(parsed,prods));
     }catch(e){setOErr("Error: "+e.message);}finally{setOLoad(false);}
   };
 
@@ -134,12 +168,31 @@ SOLO JSON:
     await doAnalyze(t||txt);
   },[prods,xr,txt]);
 
+  const importWeightsFile=useCallback(async(file)=>{
+    const text=await file.text();
+    const map={};
+    text.split(/\r?\n/).forEach((line,i)=>{
+      const t=line.trim();
+      if(!t||i===0&&/sku|clave/i.test(t))return;
+      const parts=t.split(/[,;\t]/).map(x=>x.trim().replace(/^"|"$/g,""));
+      if(parts.length>=2){const sku=parts[0];const w=parseFloat(parts[1]);if(sku&&!Number.isNaN(w))map[sku]=w;}
+    });
+    const n=Object.keys(map).length;
+    if(!n)return;
+    setProds(prev=>{
+      const next=prev.map(p=>map[p.sku]!=null?{...p,weightLbs:map[p.sku]}:p);
+      setORes(r=>r?enrichOrderResult(r,next):r);
+      return next;
+    });
+  },[]);
+
   const confirmOrder=()=>{
     if(!cData.sellerId||!cData.client)return;
     const s=sellers.find(x=>x.id===cData.sellerId);
     const now=new Date();
-    setOrders(prev=>[{id:uid(),sellerId:s.id,sellerName:s.name,zone:cData.zone||s.zone,client:cData.client,month:MN[now.getMonth()],monthIndex:now.getMonth(),folio:"",confirmedAt:now.toLocaleDateString("es-MX"),exchangeRate:xr,items:oRes.orderItems||[],summary:oRes.summary},...prev]);
-    setShowC(false);setORes(null);setTxt("");setCData({sellerId:"",client:"",zone:""});setTab("hist");
+    const enriched=enrichOrderResult(oRes,prods);
+    setOrders(prev=>[{id:uid(),sellerId:s.id,sellerName:s.name,zone:cData.zone||s.zone,client:cData.client,month:MN[now.getMonth()],monthIndex:now.getMonth(),folio:"",confirmedAt:now.toLocaleDateString("es-MX"),exchangeRate:xr,items:enriched.orderItems||[],summary:enriched.summary},...prev]);
+    setShowC(false);setORes(null);setTxt("");setPedidoSellerId("");setCData({sellerId:"",client:"",zone:""});setTab("hist");
   };
 
   const handleCostFile=useCallback(async(file)=>{
@@ -348,7 +401,15 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
         {/* NUEVO PEDIDO */}
         {tab==="pedido"&&<div className="fade">
           <div className="slbl">Analizar Pedido de Cliente</div>
-          <div className={`drop ${drag?"ov":""}`} style={{marginBottom:14}}
+          <div style={{marginBottom:14,padding:14,background:"#0d0d1c",border:"1px solid #181826"}}>
+            <div className="lbl">Vendedor *</div>
+            <select className="sel" value={pedidoSellerId} onChange={e=>{setPedidoSellerId(e.target.value);setCData(d=>({...d,sellerId:e.target.value}));}}>
+              <option value="">Selecciona vendedor…</option>
+              {sellers.map(s=><option key={s.id} value={s.id}>{s.name} — {s.zone}</option>)}
+            </select>
+            {!pedidoSellerId&&<div style={{fontSize:8,color:"#a07800",marginTop:6}}>Elige Luis Miguel Perez o Manuel Fernandez antes de analizar.</div>}
+          </div>
+          <div className={`drop ${drag?"ov":""}`} style={{marginBottom:14,opacity:pedidoSellerId?1:0.45,pointerEvents:pedidoSellerId?"auto":"none"}}
             onDragOver={e=>{e.preventDefault();setDrag(true)}} onDragLeave={()=>setDrag(false)}
             onDrop={e=>{e.preventDefault();setDrag(false);const f=e.dataTransfer.files[0];if(f)handleFileDrop(f)}}
             onClick={()=>fRef.current?.click()}>
@@ -362,12 +423,14 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
             <textarea className="inp" rows={5} style={{resize:"vertical"}} placeholder={"DET0008 x 120 cajas @ $20.00 USD\nSUA0019 x 560 cajas @ $17.15 USD\nJLT0003 x 90 cajas @ $16.50 USD"} value={txt} onChange={e=>setTxt(e.target.value)}/>
           </div>
           <div style={{display:"flex",gap:10,marginBottom:18}}>
-            <button className="btn" onClick={()=>doAnalyze(txt)} disabled={oLoad||!txt.trim()}>{oLoad?<span><span className="spin">⟳</span> Analizando…</span>:"▶ Analizar"}</button>
+            <button className="btn" onClick={()=>doAnalyze(txt)} disabled={oLoad||!txt.trim()||!pedidoSellerId}>{oLoad?<span><span className="spin">⟳</span> Analizando…</span>:"▶ Analizar"}</button>
             {oRes&&<button className="ghost" onClick={()=>{setORes(null);setTxt("");}}>Limpiar</button>}
           </div>
           {oErr&&<div className="nr" style={{marginBottom:12}}>{oErr}</div>}
           {oLoad&&<div style={{textAlign:"center",padding:40,color:"#f0a500"}}><div className="spin" style={{fontSize:22}}>⟳</div><div style={{fontSize:7.5,letterSpacing:3,marginTop:10}}>ANALIZANDO · CRUZANDO CATÁLOGO FORMEXA</div></div>}
           {oRes&&!oLoad&&<div className="fade">
+            {pedidoSellerId&&<div style={{fontSize:8.5,color:"#6c8dfa",marginBottom:10}}>Vendedor: <b>{sellers.find(s=>s.id===pedidoSellerId)?.name}</b></div>}
+            <WeightBanner summary={oRes.summary}/>
             {oRes.summary?.hasAlerts&&<div className="nr" style={{marginBottom:12,display:"flex",gap:10,alignItems:"center"}}><span>⚠️</span><div><b>HAY PRODUCTOS CON MARGEN BAJO</b><div style={{fontSize:8.5,marginTop:2}}>{oRes.summary.recommendation}</div></div></div>}
             <div className="g4" style={{marginBottom:14}}>
               {[["VENTA",fU(oRes.summary?.totalRevenueUSD),"#d8d4c8"],["COSTO",fU(oRes.summary?.totalCostUSD),"#444"],["GANANCIA",fU(oRes.summary?.totalMarginUSD),(oRes.summary?.totalMarginUSD||0)>0?"#00c896":"#ff3c3c"],["MARGEN",pct(oRes.summary?.totalMarginPct),mc(oRes.summary?.totalMarginPct||0)]].map(([l,v,c])=>(
@@ -376,12 +439,13 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
             </div>
             <div className="ovfl" style={{background:"#0d0d1c",border:"1px solid #181826",marginBottom:14}}>
               <table className="tbl">
-                <thead><tr><th>Producto</th><th>SKU</th><th>Qty</th><th>Precio</th><th>Lista</th><th>Costo</th><th>Ganancia/u</th><th>Margen</th></tr></thead>
+                <thead><tr><th>Producto</th><th>SKU</th><th>Qty</th><th>Peso</th><th>Precio</th><th>Lista</th><th>Costo</th><th>Ganancia/u</th><th>Margen</th></tr></thead>
                 <tbody>{(oRes.orderItems||[]).map((it,i)=>(
                   <tr key={i} className={it.alert?(it.marginPct<0?"ra":"rw"):"ro"}>
                     <td style={{fontSize:10}}>{it.productName}{it.matchedProduct&&it.matchedProduct!==it.productName&&<div style={{fontSize:7.5,color:"#3a3a4a"}}>→{it.matchedProduct}</div>}</td>
                     <td style={{color:"#f0a500",fontSize:9}}>{it.sku||"—"}</td>
                     <td>{it.quantity}</td>
+                    <td style={{color:it.weightLbs>0?"#6c8dfa":"#555",fontSize:9}}>{it.weightLbs>0?fmtLbs(it.weightLbs):"—"}</td>
                     <td style={{color:it.clientPriceUSD<(it.costUSD||0)?"#ff6060":"#d8d4c8"}}>{fU(it.clientPriceUSD)}</td>
                     <td style={{color:"#444"}}>{fU(it.listPriceUSD)}</td>
                     <td style={{color:"#333"}}>{it.costUSD>0?fU(it.costUSD):"—"}</td>
@@ -391,7 +455,7 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
                 ))}</tbody>
               </table>
             </div>
-            <div style={{display:"flex",justifyContent:"flex-end"}}><button className="btn" onClick={()=>setShowC(true)}>✓ Confirmar y Asignar</button></div>
+            <div style={{display:"flex",justifyContent:"flex-end"}}><button className="btn" onClick={()=>{setCData(d=>({...d,sellerId:pedidoSellerId||d.sellerId}));setShowC(true);}} disabled={!pedidoSellerId}>✓ Confirmar pedido</button></div>
           </div>}
         </div>}
 
@@ -412,9 +476,9 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
           </div>
           <div className="ovfl" style={{background:"#0d0d1c",border:"1px solid #181826"}}>
             <table className="tbl">
-              <thead><tr><th>Fecha</th><th>Cliente</th><th>Vendedor</th><th>Folio</th><th>Venta USD</th><th>SKUs</th><th>TC</th><th></th></tr></thead>
+              <thead><tr><th>Fecha</th><th>Cliente</th><th>Vendedor</th><th>Folio</th><th>Venta USD</th><th>Peso</th><th>SKUs</th><th>TC</th><th></th></tr></thead>
               <tbody>{filt.map(o=>(
-                <tr key={o.id} style={{cursor:"pointer"}} onClick={()=>setSelO(o)}>
+                <tr key={o.id} style={{cursor:"pointer"}} onClick={()=>{const e=enrichOrderResult({orderItems:o.items,summary:o.summary||{}},prods);setSelO({...o,items:e.orderItems,summary:e.summary});}}>
                   <td style={{color:"#444",fontSize:9}}>{o.confirmedAt}</td>
                   <td style={{fontSize:10.5,fontWeight:500}}>{o.client}</td>
                   <td>
@@ -425,9 +489,10 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
                   </td>
                   <td style={{color:"#3a3a4a",fontSize:9}}>{o.folio||"—"}</td>
                   <td style={{color:"#f0a500",fontWeight:500}}>{fU(o.summary.totalRevenueUSD)}</td>
+                  <td style={{color:o.summary?.weightStatus==="over"?"#ff6060":"#6c8dfa",fontSize:9}}>{o.summary?.totalWeightLbs>0?fmtLbs(o.summary.totalWeightLbs):"—"}</td>
                   <td style={{color:"#555"}}>{o.items.length}</td>
                   <td style={{color:"#252535",fontSize:9}}>{o.exchangeRate}</td>
-                  <td><button className="ghost" style={{padding:"3px 9px",fontSize:7.5}} onClick={e=>{e.stopPropagation();setSelO(o);}}>Ver</button></td>
+                  <td><button className="ghost" style={{padding:"3px 9px",fontSize:7.5}} onClick={e=>{e.stopPropagation();const en=enrichOrderResult({orderItems:o.items,summary:o.summary||{}},prods);setSelO({...o,items:en.orderItems,summary:en.summary});}}>Ver</button></td>
                 </tr>
               ))}</tbody>
             </table>
@@ -556,8 +621,14 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
         {tab==="cat"&&<div className="fade">
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12,flexWrap:"wrap",gap:10}}>
             <div className="slbl" style={{marginBottom:0}}>Catálogo · {prods.length} SKUs (ABR 2026)</div>
-            <div style={{display:"flex",gap:8}}><button className="ghost" onClick={()=>setTab("costos")}>↑ Costos</button><button className="btn" onClick={()=>setShowAP(!showAP)}>{showAP?"Cancelar":"+ Agregar"}</button></div>
+            <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+              <button className="ghost" onClick={()=>wRef.current?.click()}>↑ Importar pesos CSV</button>
+              <input ref={wRef} type="file" style={{display:"none"}} accept=".csv,.txt" onChange={e=>{if(e.target.files[0])importWeightsFile(e.target.files[0]);e.target.value="";}}/>
+              <button className="ghost" onClick={()=>setTab("costos")}>Costos</button>
+              <button className="btn" onClick={()=>setShowAP(!showAP)}>{showAP?"Cancelar":"+ Agregar"}</button>
+            </div>
           </div>
+          <div className="ni" style={{marginBottom:12,fontSize:8.5}}>Peso = lbs por caja × cantidad. Límite EU: {fmtLbs(MAX_CIRCULATION_LBS)}. CSV: <code>SKU,peso_lbs</code> (ej. DET0008,12.5)</div>
           <div style={{display:"flex",gap:10,marginBottom:12,flexWrap:"wrap"}}>
             <input className="inp" style={{maxWidth:240}} placeholder="SKU o nombre…" value={catSrch} onChange={e=>setCatSrch(e.target.value)}/>
             <select className="sel" style={{width:"auto"}} value={catCat} onChange={e=>setCatCat(e.target.value)}>
@@ -573,12 +644,13 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
               ))}
               <div><div className="lbl">Costo MXN</div><input className="inp" type="number" value={nProd.costMXN} onChange={e=>setNProd({...nProd,costMXN:e.target.value})}/></div>
               <div><div className="lbl">Lista USD</div><input className="inp" type="number" value={nProd.listPriceUSD} onChange={e=>setNProd({...nProd,listPriceUSD:e.target.value})}/></div>
+              <div><div className="lbl">Peso lbs/caja</div><input className="inp" type="number" step="0.01" value={nProd.weightLbs} onChange={e=>setNProd({...nProd,weightLbs:e.target.value})}/></div>
             </div>
-            <button className="btn" onClick={()=>{if(!nProd.sku||!nProd.name)return;setProds(p=>[...p,{...nProd,id:uid(),costMXN:parseFloat(nProd.costMXN)||0,listPriceUSD:parseFloat(nProd.listPriceUSD)||0}]);setNProd({sku:"",name:"",costMXN:"",listPriceUSD:"",category:"",brand:""});setShowAP(false);}}>Guardar</button>
+            <button className="btn" onClick={()=>{if(!nProd.sku||!nProd.name)return;setProds(p=>[...p,{...nProd,id:uid(),costMXN:parseFloat(nProd.costMXN)||0,listPriceUSD:parseFloat(nProd.listPriceUSD)||0,weightLbs:parseFloat(nProd.weightLbs)||0}]);setNProd({sku:"",name:"",costMXN:"",listPriceUSD:"",category:"",brand:"",weightLbs:""});setShowAP(false);}}>Guardar</button>
           </div>}
           <div className="ovfl" style={{background:"#0d0d1c",border:"1px solid #181826"}}>
             <table className="tbl">
-              <thead><tr><th>SKU</th><th>Producto</th><th>Cat.</th><th>Marca</th><th>Costo MXN</th><th>Costo USD</th><th>Lista USD</th><th>Actualizado</th><th>Margen</th><th></th></tr></thead>
+              <thead><tr><th>SKU</th><th>Producto</th><th>Cat.</th><th>Marca</th><th>Peso lbs/caja</th><th>Costo MXN</th><th>Costo USD</th><th>Lista USD</th><th>Actualizado</th><th>Margen</th><th></th></tr></thead>
               <tbody>{pFilt.map(p=>{
                 const cu=p.costMXN>0?p.costMXN/xr:null;
                 const m=cu!=null?(p.listPriceUSD-cu)/p.listPriceUSD:null;
@@ -588,6 +660,7 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
                   <td style={{fontSize:10}}>{ed?<input className="inp" value={eProd.name} onChange={e=>setEProd({...eProd,name:e.target.value})}/>:p.name}</td>
                   <td style={{color:"#3a3a4a",fontSize:8.5}}>{p.category}</td>
                   <td style={{color:"#252535",fontSize:8.5}}>{p.brand}</td>
+                  <td style={{color:p.weightLbs>0?"#6c8dfa":"#252535",fontSize:9}}>{ed?<input className="inp" type="number" step="0.01" style={{width:70}} value={eProd.weightLbs??0} onChange={e=>setEProd({...eProd,weightLbs:parseFloat(e.target.value)||0})}/>:p.weightLbs>0?fmtLbs(p.weightLbs):"—"}</td>
                   <td style={{color:p.costMXN>0?"#d8d4c8":"#252535"}}>{ed?<input className="inp" type="number" style={{width:85}} value={eProd.costMXN} onChange={e=>setEProd({...eProd,costMXN:parseFloat(e.target.value)})}/>:p.costMXN>0?fM(p.costMXN):<span style={{fontSize:8}}>Pendiente</span>}</td>
                   <td style={{color:"#333",fontSize:9}}>{cu?fU(cu):"—"}</td>
                   <td>{ed?<input className="inp" type="number" style={{width:75}} value={eProd.listPriceUSD} onChange={e=>setEProd({...eProd,listPriceUSD:parseFloat(e.target.value)})}/>:fU(p.listPriceUSD)}</td>
@@ -648,7 +721,8 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
       {showC&&<div className="mbg" onClick={()=>setShowC(false)}>
         <div className="mdl fade" onClick={e=>e.stopPropagation()}>
           <div style={{fontFamily:"'Syne',sans-serif",fontSize:13,fontWeight:800,color:"#f0a500",marginBottom:4}}>Confirmar Pedido</div>
-          <div style={{fontSize:8,color:"#3a3a4a",marginBottom:14}}>Asigna el pedido a un vendedor</div>
+          <div style={{fontSize:8,color:"#3a3a4a",marginBottom:14}}>Cliente y vendedor del pedido</div>
+          <WeightBanner summary={oRes?.summary}/>
           <div className="g2" style={{gap:8,marginBottom:14}}>
             <div className="rcard"><div className="lbl">Venta</div><div style={{fontSize:16,color:"#f0a500"}}>{fU(oRes?.summary?.totalRevenueUSD)}</div></div>
             <div className="rcard"><div className="lbl">Ganancia</div><div style={{fontSize:16,color:"#00c896"}}>{fU(oRes?.summary?.totalMarginUSD)}</div></div>
@@ -685,6 +759,7 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
             </div>
             <button className="ghost" style={{padding:"3px 9px"}} onClick={()=>setSelO(null)}>✕</button>
           </div>
+          <WeightBanner summary={selO.summary}/>
           <div className="g4" style={{gap:8,marginBottom:12}}>
             {[["Venta",fU(selO.summary.totalRevenueUSD),"#d8d4c8"],["Costo",fU(selO.summary.totalCostUSD),"#444"],["Ganancia",fU(selO.summary.totalMarginUSD),"#00c896"],["SKUs",selO.items.length,"#f0a500"]].map(([l,v,c])=>(
               <div key={l} className="rcard"><div className="lbl">{l}</div><div style={{fontSize:14,color:c}}>{v}</div></div>
