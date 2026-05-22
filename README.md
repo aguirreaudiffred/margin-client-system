@@ -29,16 +29,22 @@ npm run preview
 
 La UI proviene de `margin-system.jsx`. Los datos de ejemplo van embebidos en `src/App.jsx`.
 
-## Web pública
+## Web pública (cualquiera con el link)
 
-**URL en vivo:** https://aguirreaudiffred.github.io/margin-client-system/
+- **Vercel:** https://margin-client-system.vercel.app
+- **GitHub Pages:** https://aguirreaudiffred.github.io/margin-client-system/
 
-Sitio estático publicado desde la rama `gh-pages` (GitHub Pages). Tras cambios en la app:
+Si Vercel muestra *Connection failed* al importar el repo, usa el link de arriba o sigue `DEPLOY.md`.
 
-```bash
-npm run build -- --base=/margin-client-system/
-# publicar contenido de dist/ en la rama gh-pages
-```
+### PDF / Claude (opcional)
+
+Vercel → proyecto → **Settings** → **Environment Variables**:
+
+| Name | Value |
+|------|--------|
+| `VITE_ANTHROPIC_API_KEY` | tu key de Anthropic |
+
+Guarda y **Redeploy** el último deployment.
 
 ## Repositorio
 
