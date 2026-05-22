@@ -7,4 +7,14 @@ export default defineConfig({
     port: 5174,
     open: true,
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          recharts: ["recharts"],
+          react: ["react", "react-dom"],
+        },
+      },
+    },
+  },
 });

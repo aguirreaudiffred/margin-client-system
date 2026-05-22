@@ -1,5 +1,4 @@
 import{useState,useRef,useEffect,useCallback}from"react";
-import{BarChart,Bar,LineChart,Line,XAxis,YAxis,Tooltip,ResponsiveContainer,Cell,PieChart,Pie,Legend}from"recharts";
 
 
 const fU=n=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:2}).format(n||0);
@@ -46,6 +45,7 @@ export default function App(){
   const[orders,setOrders]=useState([]);
   const[dataLoad,setDataLoad]=useState(true);
   const[dataErr,setDataErr]=useState(null);
+  const[R,setR]=useState(null);
   const[xr,setXr]=useState(17.15);
   const[xrLoad,setXrLoad]=useState(false);
   const[xrDate,setXrDate]=useState(null);
@@ -99,6 +99,10 @@ export default function App(){
       finally{setDataLoad(false);}
     })();
   },[]);
+
+  useEffect(()=>{
+    if(!dataLoad&&!R)import("recharts").then(setR);
+  },[dataLoad,R]);
 
   useEffect(()=>{
     if(cData.sellerId){const s=sellers.find(x=>x.id===cData.sellerId);if(s)setCData(d=>({...d,zone:s.zone}));}
@@ -206,7 +210,10 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
   const TABS=[["dash","Dashboard"],["costos","Cargar Costos"],["pedido","Nuevo Pedido"],["hist","Facturas"],["rep","Reportes"],["cat","Catálogo"],["vend","Equipo"]];
 
   if(dataLoad)return(<div className="app-loading"><span className="spin">↻</span>Cargando datos…</div>);
-  if(dataErr)return(<div className="app-loading" style={{color:"#ff6060",padding:20,textAlign:"center"}}>{dataErr}</div>);
+  if(dataErr)return(<div className="app-loading" style={{color:"#ff6060",padding:20,textAlign:"center",maxWidth:360}}>{dataErr}<div style={{marginTop:12,fontSize:8,color:"#555"}}>Usa: <a href="https://margin-client-system.vercel.app" style={{color:"#f0a500"}}>margin-client-system.vercel.app</a></div></div>);
+  if(!R)return(<div className="app-loading"><span className="spin">↻</span>Preparando interfaz…</div>);
+  const{BarChart,Bar,LineChart,Line,XAxis,YAxis,Tooltip,ResponsiveContainer,Cell,PieChart,Pie,Legend}=R;
+  const ChartShell=({h=140,children})=>(<ResponsiveContainer width="100%" height={h}>{children}</ResponsiveContainer>);
 
   return(
     <div style={{fontFamily:"'IBM Plex Mono',monospace",background:"#06060e",minHeight:"100vh",color:"#d8d4c8"}}>
@@ -256,23 +263,19 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
           <div className="g2" style={{marginBottom:16}}>
             <div className="card">
               <div className="lbl" style={{marginBottom:10}}>Facturación Mensual (USD)</div>
-              <ResponsiveContainer width="100%" height={140}>
-                <BarChart data={byM} barSize={22}>
+              <ChartShell h={140}><BarChart data={byM} barSize={22}>
                   <XAxis dataKey="month" tick={{fill:"#3a3a4a",fontSize:9}} axisLine={false} tickLine={false}/>
                   <YAxis hide/><Tooltip content={<Tip/>}/>
                   <Bar dataKey="revenue" name="Venta" radius={[3,3,0,0]}>{byM.map((_,i)=><Cell key={i} fill={C[i%C.length]}/>)}</Bar>
-                </BarChart>
-              </ResponsiveContainer>
+                </BarChart></ChartShell>
             </div>
             <div className="card">
               <div className="lbl" style={{marginBottom:10}}>Venta por Cliente</div>
-              <ResponsiveContainer width="100%" height={140}>
-                <BarChart data={byC.slice(0,5)} barSize={18} layout="vertical">
+              <ChartShell h={140}><BarChart data={byC.slice(0,5)} barSize={18} layout="vertical">
                   <XAxis type="number" hide/><YAxis dataKey="name" type="category" tick={{fill:"#555",fontSize:8.5}} width={110} axisLine={false} tickLine={false}/>
                   <Tooltip content={<Tip/>}/>
                   <Bar dataKey="revenue" name="Venta" radius={[0,3,3,0]}>{byC.slice(0,5).map((_,i)=><Cell key={i} fill={C[i%C.length]}/>)}</Bar>
-                </BarChart>
-              </ResponsiveContainer>
+                </BarChart></ChartShell>
             </div>
           </div>
           <div className="g2">
@@ -475,32 +478,32 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
 
           {rv==="overview"&&<div className="fade g2" style={{gap:12}}>
             <div className="card"><div className="lbl" style={{marginBottom:9}}>Venta Mensual</div>
-              <ResponsiveContainer width="100%" height={155}><BarChart data={byM} barSize={22}>
+              <ChartShell h={155}><BarChart data={byM} barSize={22}>
                 <XAxis dataKey="month" tick={{fill:"#3a3a4a",fontSize:9}} axisLine={false} tickLine={false}/>
                 <YAxis hide/><Tooltip content={<Tip/>}/>
                 <Bar dataKey="revenue" name="Venta" radius={[3,3,0,0]}>{byM.map((_,i)=><Cell key={i} fill={C[i%C.length]}/>)}</Bar>
-              </BarChart></ResponsiveContainer>
+              </BarChart></ChartShell>
             </div>
             <div className="card"><div className="lbl" style={{marginBottom:9}}>Por Cliente</div>
-              <ResponsiveContainer width="100%" height={155}><PieChart>
+              <ChartShell h={155}><PieChart>
                 <Pie data={byC} dataKey="revenue" nameKey="name" cx="50%" cy="50%" outerRadius={60} label={({name,percent})=>`${name.split(" ")[0]} ${(percent*100).toFixed(0)}%`} style={{fontSize:8}}>
                   {byC.map((_,i)=><Cell key={i} fill={C[i%C.length]}/>)}
                 </Pie><Tooltip formatter={v=>fU(v)}/>
-              </PieChart></ResponsiveContainer>
+              </PieChart></ChartShell>
             </div>
             <div className="card"><div className="lbl" style={{marginBottom:9}}>Top SKUs Vendidos</div>
-              <ResponsiveContainer width="100%" height={155}><BarChart data={bySku.slice(0,6)} barSize={14} layout="vertical">
+              <ChartShell h={155}><BarChart data={bySku.slice(0,6)} barSize={14} layout="vertical">
                 <XAxis type="number" hide/><YAxis dataKey="sku" type="category" tick={{fill:"#666",fontSize:8.5}} width={65} axisLine={false} tickLine={false}/>
                 <Tooltip content={<Tip/>}/>
                 <Bar dataKey="rev" name="Venta" radius={[0,3,3,0]}>{bySku.slice(0,6).map((_,i)=><Cell key={i} fill={C[i%C.length]}/>)}</Bar>
-              </BarChart></ResponsiveContainer>
+              </BarChart></ChartShell>
             </div>
             <div className="card"><div className="lbl" style={{marginBottom:9}}>Tendencia</div>
-              <ResponsiveContainer width="100%" height={155}><LineChart data={byM}>
+              <ChartShell h={155}><LineChart data={byM}>
                 <XAxis dataKey="month" tick={{fill:"#3a3a4a",fontSize:9}} axisLine={false} tickLine={false}/>
                 <YAxis hide/><Tooltip content={<Tip/>}/>
                 <Line dataKey="revenue" name="Venta" stroke="#f0a500" strokeWidth={2} dot={{fill:"#f0a500",r:3}}/>
-              </LineChart></ResponsiveContainer>
+              </LineChart></ChartShell>
             </div>
           </div>}
 
@@ -522,11 +525,11 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
           {rv==="vendedores"&&<div className="fade">
             <div className="card" style={{marginBottom:12}}>
               <div className="lbl" style={{marginBottom:9}}>Venta por Vendedor</div>
-              <ResponsiveContainer width="100%" height={160}><BarChart data={byS} barSize={24} layout="vertical">
+              <ChartShell h={160}><BarChart data={byS} barSize={24} layout="vertical">
                 <XAxis type="number" hide/><YAxis dataKey="name" type="category" tick={{fill:"#666",fontSize:9.5}} width={65} axisLine={false} tickLine={false}/>
                 <Tooltip content={<Tip/>}/>
                 <Bar dataKey="revenue" name="Venta" radius={[0,3,3,0]}>{byS.map((_,i)=><Cell key={i} fill={C[i%C.length]}/>)}</Bar>
-              </BarChart></ResponsiveContainer>
+              </BarChart></ChartShell>
             </div>
             <div className="ovfl" style={{background:"#0d0d1c",border:"1px solid #181826"}}>
               <table className="tbl"><thead><tr><th>Vendedor</th><th>Facturas</th><th>Venta</th><th>#</th></tr></thead>
@@ -557,11 +560,11 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
 
           {rv==="trend"&&<div className="fade">
             <div className="card"><div className="lbl" style={{marginBottom:9}}>Venta por Vendedor / Mes</div>
-              <ResponsiveContainer width="100%" height={200}><LineChart data={ML.map(m=>{const row={month:m};sellers.forEach(s=>{row[s.name.split(" ")[0]]=+orders.filter(o=>o.month===m&&o.sellerId===s.id).reduce((a,o)=>a+o.summary.totalRevenueUSD,0).toFixed(0)});return row;})}>
+              <ChartShell h={200}><LineChart data={ML.map(m=>{const row={month:m};sellers.forEach(s=>{row[s.name.split(" ")[0]]=+orders.filter(o=>o.month===m&&o.sellerId===s.id).reduce((a,o)=>a+o.summary.totalRevenueUSD,0).toFixed(0)});return row;})}>
                 <XAxis dataKey="month" tick={{fill:"#3a3a4a",fontSize:9}} axisLine={false} tickLine={false}/>
                 <YAxis hide/><Tooltip content={<Tip/>}/><Legend wrapperStyle={{fontSize:8.5,color:"#555"}}/>
                 {sellers.map((s,i)=><Line key={s.id} dataKey={s.name.split(" ")[0]} stroke={C[i%C.length]} strokeWidth={1.5} dot={{r:2}}/>)}
-              </LineChart></ResponsiveContainer>
+              </LineChart></ChartShell>
             </div>
           </div>}
         </div>}
@@ -650,7 +653,7 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
                   <div className="rcard"><div style={{fontSize:7.5,color:"#3a3a4a",marginBottom:3}}>CLIENTES</div><div style={{fontSize:11,color:"#6c8dfa"}}>{cls.slice(0,2).join(", ")}</div></div>
                 </div>
                 <div style={{fontSize:7.5,color:"#181826",marginBottom:5}}>TREND</div>
-                <ResponsiveContainer width="100%" height={40}><LineChart data={trend}><Line dataKey="v" stroke={C[i%C.length]} strokeWidth={1.5} dot={false}/></LineChart></ResponsiveContainer>
+                <ChartShell h={40}><LineChart data={trend}><Line dataKey="v" stroke={C[i%C.length]} strokeWidth={1.5} dot={false}/></LineChart></ChartShell>
               </div>);
             })}
           </div>

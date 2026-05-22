@@ -29,12 +29,15 @@ npm run preview
 
 La UI proviene de `margin-system.jsx`. Los datos de ejemplo van embebidos en `src/App.jsx`.
 
-## Web pública (cualquiera con el link)
+## Web pública (usa este link)
 
-- **Vercel:** https://margin-client-system.vercel.app
-- **GitHub Pages:** https://aguirreaudiffred.github.io/margin-client-system/
+**https://margin-client-system.vercel.app**
 
-Si Vercel muestra *Connection failed* al importar el repo, usa el link de arriba o sigue `DEPLOY.md`.
+(Espera 2–3 segundos: primero carga la app, luego los datos y gráficos.)
+
+Alternativa: https://aguirreaudiffred.github.io/margin-client-system/
+
+Si no carga, sigue `DEPLOY.md`.
 
 ### PDF / Claude (opcional)
 
