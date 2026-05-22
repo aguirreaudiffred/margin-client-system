@@ -1,0 +1,57 @@
+*{box-sizing:border-box;margin:0;padding:0;}
+::-webkit-scrollbar{width:3px;height:3px}::-webkit-scrollbar-thumb{background:#f0a500}
+.fade{animation:fi .3s ease}@keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.tab{background:none;border:none;color:#3a3a4a;font-family:inherit;font-size:8.5px;letter-spacing:2px;text-transform:uppercase;padding:12px 13px;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap}
+.tab.on{color:#f0a500;border-bottom-color:#f0a500}.tab:hover{color:#bbb}
+.card{background:#0d0d1c;border:1px solid #181826;padding:18px;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#f0a500,transparent)}
+.btn{background:#f0a500;color:#06060e;border:none;padding:9px 20px;font-family:inherit;font-size:8.5px;letter-spacing:2px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all .15s;white-space:nowrap}
+.btn:hover{background:#ffb800}.btn:disabled{background:#181826;color:#333;cursor:not-allowed}
+.btng{background:#00c896;color:#06060e;border:none;padding:9px 20px;font-family:inherit;font-size:8.5px;letter-spacing:2px;text-transform:uppercase;font-weight:700;cursor:pointer;white-space:nowrap}
+.btng:hover{background:#00dfaa}.btng:disabled{background:#181826;color:#333;cursor:not-allowed}
+.ghost{background:none;border:1px solid #1e1e2e;color:#555;padding:7px 14px;font-family:inherit;font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .15s;white-space:nowrap}
+.ghost:hover{border-color:#f0a500;color:#f0a500}
+.inp{background:#09091a;border:1px solid #181826;color:#dedad0;padding:8px 12px;font-family:inherit;font-size:11px;width:100%;outline:none;transition:border .15s}
+.inp:focus{border-color:#f0a500}
+.sel{background:#09091a;border:1px solid #181826;color:#dedad0;padding:8px 12px;font-family:inherit;font-size:11px;width:100%;outline:none;cursor:pointer}
+.lbl{font-size:7.5px;color:#3a3a4a;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:5px}
+.slbl{font-size:7.5px;color:#f0a500;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px}
+.pill{display:inline-block;padding:2px 8px;font-size:7.5px;font-weight:600}
+.pr{background:rgba(255,60,60,.12);color:#ff6060}.pg{background:rgba(0,200,150,.12);color:#00c896}
+.py{background:rgba(240,165,0,.12);color:#f0a500}.pb{background:rgba(108,141,250,.12);color:#6c8dfa}
+.drop{border:2px dashed #181826;padding:28px;text-align:center;cursor:pointer;transition:all .15s}
+.drop.ov,.drop:hover{border-color:#f0a500;background:rgba(240,165,0,.03)}
+.tbl{width:100%;border-collapse:collapse;font-size:10.5px}
+.tbl th{color:#3a3a4a;font-size:7.5px;letter-spacing:2px;text-transform:uppercase;padding:8px 12px;text-align:left;border-bottom:1px solid #0e0e1c;white-space:nowrap}
+.tbl td{padding:9px 12px;border-bottom:1px solid #09091a;vertical-align:middle}
+.tbl tr:hover td{background:rgba(255,255,255,.008)}
+.ra{background:rgba(255,60,60,.05);border-left:3px solid #ff3c3c}
+.ro{border-left:3px solid #00c896}.rw{background:rgba(240,165,0,.05);border-left:3px solid #f0a500}
+.mb{background:#0e0e1e;height:4px;border-radius:2px}.mf{height:4px;border-radius:2px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:900px){.g4{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.g4{grid-template-columns:1fr}.g3{grid-template-columns:1fr}.g2{grid-template-columns:1fr}}
+.ava{border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;color:#06060e}
+.spin{animation:sp 1s linear infinite;display:inline-block}@keyframes sp{to{transform:rotate(360deg)}}
+.mbg{position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px}
+.mdl{background:#0d0d1c;border:1px solid #252535;padding:24px;max-width:520px;width:100%;max-height:92vh;overflow-y:auto}
+.mdlw{background:#0d0d1c;border:1px solid #252535;padding:24px;max-width:900px;width:100%;max-height:92vh;overflow-y:auto}
+.ovfl{overflow-x:auto}
+.chip{display:inline-flex;align-items:center;background:#0d0d1c;border:1px solid #181826;padding:3px 9px;font-size:8.5px;color:#555;white-space:nowrap}
+.rtab{background:none;border:none;color:#3a3a4a;font-family:inherit;font-size:7.5px;letter-spacing:2px;text-transform:uppercase;padding:7px 12px;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s}
+.rtab.on{color:#f0a500;border-bottom-color:#f0a500}.rtab:hover{color:#bbb}
+.rcard{background:#0d0d1c;border:1px solid #181826;padding:14px}
+.ni{background:rgba(240,165,0,.05);border:1px solid rgba(240,165,0,.18);padding:11px 14px;font-size:9.5px;color:#a07800}
+.ng{background:rgba(0,200,150,.05);border:1px solid rgba(0,200,150,.18);padding:11px 14px;font-size:9.5px;color:#00a070}
+.nr{background:rgba(255,60,60,.05);border:1px solid rgba(255,60,60,.18);padding:11px 14px;font-size:9.5px;color:#cc4040}
+.nb{background:rgba(108,141,250,.05);border:1px solid rgba(108,141,250,.18);padding:11px 14px;font-size:9.5px;color:#5070d0}
+.dn{background:rgba(255,60,60,.12);color:#ff6060;padding:1px 7px;font-size:8.5px;font-weight:700}
+.up{background:rgba(0,200,150,.12);color:#00c896;padding:1px 7px;font-size:8.5px;font-weight:700}
+.nw{background:rgba(108,141,250,.12);color:#6c8dfa;padding:1px 7px;font-size:8.5px;font-weight:700}
+
+.boot-loader{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;background:#06060e;color:#3a3a4a;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;gap:12px}
+.boot-loader .spin{font-size:18px;color:#f0a500}
+.app-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;background:#06060e;color:#3a3a4a;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;gap:12px}
+.app-loading .spin{font-size:18px;color:#f0a500}
