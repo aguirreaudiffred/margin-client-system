@@ -1,4 +1,6 @@
 import{useState,useRef,useEffect,useCallback}from"react";
+import productsSeed from "./data/products.json";
+import ordersSeed from "./data/orders.json";
 
 
 const fU=n=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:2}).format(n||0);
@@ -40,11 +42,9 @@ const Tip=({active,payload,label})=>{
 
 export default function App(){
   const[tab,setTab]=useState("dash");
-  const[prods,setProds]=useState([]);
+  const[prods,setProds]=useState(productsSeed);
   const[sellers,setSellers]=useState(SELLERS);
-  const[orders,setOrders]=useState([]);
-  const[dataLoad,setDataLoad]=useState(true);
-  const[dataErr,setDataErr]=useState(null);
+  const[orders,setOrders]=useState(ordersSeed);
   const[R,setR]=useState(null);
   const[xr,setXr]=useState(17.15);
   const[xrLoad,setXrLoad]=useState(false);
@@ -86,23 +86,8 @@ export default function App(){
   },[]);
 
   useEffect(()=>{
-    (async()=>{
-      setDataLoad(true);setDataErr(null);
-      try{
-        const base=import.meta.env.BASE_URL;
-        const [pr,or]=await Promise.all([
-          fetch(base+"data/products.json").then(r=>{if(!r.ok)throw new Error("products");return r.json();}),
-          fetch(base+"data/orders.json").then(r=>{if(!r.ok)throw new Error("orders");return r.json();}),
-        ]);
-        setProds(pr);setOrders(or);
-      }catch(e){setDataErr("No se pudieron cargar productos y pedidos.");}
-      finally{setDataLoad(false);}
-    })();
-  },[]);
-
-  useEffect(()=>{
-    if(!dataLoad&&!R)import("recharts").then(setR);
-  },[dataLoad,R]);
+    if(!R)import("recharts").then(setR);
+  },[R]);
 
   useEffect(()=>{
     if(cData.sellerId){const s=sellers.find(x=>x.id===cData.sellerId);if(s)setCData(d=>({...d,zone:s.zone}));}
@@ -209,9 +194,7 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
 
   const TABS=[["dash","Dashboard"],["costos","Cargar Costos"],["pedido","Nuevo Pedido"],["hist","Facturas"],["rep","Reportes"],["cat","Catálogo"],["vend","Equipo"]];
 
-  if(dataLoad)return(<div className="app-loading"><span className="spin">↻</span>Cargando datos…</div>);
-  if(dataErr)return(<div className="app-loading" style={{color:"#ff6060",padding:20,textAlign:"center",maxWidth:360}}>{dataErr}<div style={{marginTop:12,fontSize:8,color:"#555"}}>Usa: <a href="https://margin-client-system.vercel.app" style={{color:"#f0a500"}}>margin-client-system.vercel.app</a></div></div>);
-  if(!R)return(<div className="app-loading"><span className="spin">↻</span>Preparando interfaz…</div>);
+  if(!R)return(<div className="app-loading"><span className="spin">↻</span>Cargando…</div>);
   const{BarChart,Bar,LineChart,Line,XAxis,YAxis,Tooltip,ResponsiveContainer,Cell,PieChart,Pie,Legend}=R;
   const ChartShell=({h=140,children})=>(<ResponsiveContainer width="100%" height={h}>{children}</ResponsiveContainer>);
 

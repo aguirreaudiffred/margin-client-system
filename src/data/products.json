@@ -1,0 +1,812 @@
+[
+  {
+    "id": "p1",
+    "sku": "DET0004",
+    "name": "ARIEL C/DOWNY 1.5 KG C/12 PZS",
+    "listPriceUSD": 40.37,
+    "category": "DETERGENTE",
+    "brand": "ARIEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p2",
+    "sku": "DET0005",
+    "name": "ARIEL C/DOWNY 750 GR C/12 PZS",
+    "listPriceUSD": 20.2,
+    "category": "DETERGENTE",
+    "brand": "ARIEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p3",
+    "sku": "DET0008",
+    "name": "ARIEL REGULAR 250 GR C/36 PZS",
+    "listPriceUSD": 20.14,
+    "category": "DETERGENTE",
+    "brand": "ARIEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p4",
+    "sku": "DET0009",
+    "name": "ARIEL REGULAR 5 KG C/4 PZS",
+    "listPriceUSD": 41,
+    "category": "DETERGENTE",
+    "brand": "ARIEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p5",
+    "sku": "DET0010",
+    "name": "ARIEL REGULAR 500 GR C/18 PZS",
+    "listPriceUSD": 20.14,
+    "category": "DETERGENTE",
+    "brand": "ARIEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p6",
+    "sku": "DET0011",
+    "name": "ARIEL REGULAR 850 GR C/10 PZS",
+    "listPriceUSD": 17.9,
+    "category": "DETERGENTE",
+    "brand": "ARIEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p7",
+    "sku": "DET0014",
+    "name": "ARIEL PWD REGBAG 4KG C/4 PZS",
+    "listPriceUSD": 35.5,
+    "category": "DETERGENTE",
+    "brand": "ARIEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p8",
+    "sku": "DET0002",
+    "name": "LIQ ACE UNO P TODO 2.8LT C/4 PZS",
+    "listPriceUSD": 19,
+    "category": "DETERGENTE",
+    "brand": "ACE",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p9",
+    "sku": "DET1001",
+    "name": "LIQ ACE UNO P TODO 8000ML C/2 PZS",
+    "listPriceUSD": 12.97,
+    "category": "DETERGENTE",
+    "brand": "ACE",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p10",
+    "sku": "DET0003",
+    "name": "LIQ ACE UNO P TODO 800ML C/9 PZS",
+    "listPriceUSD": 11.66,
+    "category": "DETERGENTE",
+    "brand": "ACE",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p11",
+    "sku": "DET1002",
+    "name": "LIQ ARIEL DOBLE PODER 8000ML C/2 PZS",
+    "listPriceUSD": 14.23,
+    "category": "DETERGENTE",
+    "brand": "ARIEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p12",
+    "sku": "DET0006",
+    "name": "LIQ ARIEL REVITCOLOR 2.8LT C/4 PZS",
+    "listPriceUSD": 22.5,
+    "category": "DETERGENTE",
+    "brand": "ARIEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p13",
+    "sku": "DET0007",
+    "name": "LIQ ARIEL REVITCOLOR 800ML C/9 PZS",
+    "listPriceUSD": 12.74,
+    "category": "DETERGENTE",
+    "brand": "ARIEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p14",
+    "sku": "DET1004",
+    "name": "LIQ ARIEL REVITCOLOR 8500ML C/2 PZS",
+    "listPriceUSD": 15,
+    "category": "DETERGENTE",
+    "brand": "ARIEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p15",
+    "sku": "DET0016",
+    "name": "LIQ PERSIL CLR 4.65 LT C/4 PZS",
+    "listPriceUSD": 39.62,
+    "category": "DETERGENTE",
+    "brand": "PERSIL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p16",
+    "sku": "DET0017",
+    "name": "LIQ PERSIL CLR 6.64 LT C/3 PZS",
+    "listPriceUSD": 40.96,
+    "category": "DETERGENTE",
+    "brand": "PERSIL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p17",
+    "sku": "DET0019",
+    "name": "LIQ PERSIL REGULAR 4.65 LT C/4 PZS",
+    "listPriceUSD": 39.62,
+    "category": "DETERGENTE",
+    "brand": "PERSIL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p18",
+    "sku": "DET0020",
+    "name": "LIQ PERSIL REGULAR 6.64 LT C/3 PZS",
+    "listPriceUSD": 40.96,
+    "category": "DETERGENTE",
+    "brand": "PERSIL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p19",
+    "sku": "DET0033",
+    "name": "SALVO LIMON LIQUIDO 640 ML C/12",
+    "listPriceUSD": 19.95,
+    "category": "DETERGENTE",
+    "brand": "SALVO",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p20",
+    "sku": "SUA0001",
+    "name": "DOWNY AMANECER 2.8L C/6 PZS",
+    "listPriceUSD": 28.43,
+    "category": "SUAVIZANTE",
+    "brand": "DOWNY",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p21",
+    "sku": "SUA0002",
+    "name": "DOWNY AMANECER 730 ML C/9 PZS",
+    "listPriceUSD": 11,
+    "category": "SUAVIZANTE",
+    "brand": "DOWNY",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p22",
+    "sku": "SUA0003",
+    "name": "DOWNY ELEGANCE 2.6 LT C/6 PZS",
+    "listPriceUSD": 28.43,
+    "category": "SUAVIZANTE",
+    "brand": "DOWNY",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p23",
+    "sku": "SUA0004",
+    "name": "DOWNY ELEGANCE 750 ML C/9 PZS",
+    "listPriceUSD": 12.75,
+    "category": "SUAVIZANTE",
+    "brand": "DOWNY",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p24",
+    "sku": "SUA0005",
+    "name": "DOWNY FLORAL 2.8 LT C/6 PZS",
+    "listPriceUSD": 28.43,
+    "category": "SUAVIZANTE",
+    "brand": "DOWNY",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p25",
+    "sku": "SUA0006",
+    "name": "DOWNY FLORAL 360 ML C/12 PZS",
+    "listPriceUSD": 8.75,
+    "category": "SUAVIZANTE",
+    "brand": "DOWNY",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p26",
+    "sku": "SUA0007",
+    "name": "DOWNY INTENSE FLORAL 730 ML C/9 PZS",
+    "listPriceUSD": 11,
+    "category": "SUAVIZANTE",
+    "brand": "DOWNY",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p27",
+    "sku": "SUA0008",
+    "name": "DOWNY PASSION 2.6 LT C/6 PZS",
+    "listPriceUSD": 28.43,
+    "category": "SUAVIZANTE",
+    "brand": "DOWNY",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p28",
+    "sku": "SUA0009",
+    "name": "DOWNY PASSION 750 ML C/9 PZS",
+    "listPriceUSD": 13,
+    "category": "SUAVIZANTE",
+    "brand": "DOWNY",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p29",
+    "sku": "SUA0010",
+    "name": "DOWNY PUREZA SILVESTRE 2.8 LT C/6 PZS",
+    "listPriceUSD": 28.43,
+    "category": "SUAVIZANTE",
+    "brand": "DOWNY",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p30",
+    "sku": "SUA0011",
+    "name": "DOWNY ROMANCE 2.6 LT C/6 PZS",
+    "listPriceUSD": 28.43,
+    "category": "SUAVIZANTE",
+    "brand": "DOWNY",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p31",
+    "sku": "SUA0012",
+    "name": "DOWNY ROMANCE 750 ML C/9 PZS",
+    "listPriceUSD": 13,
+    "category": "SUAVIZANTE",
+    "brand": "DOWNY",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p32",
+    "sku": "SUA0013",
+    "name": "DOWNY SUAVE Y GENTIL 2800ML C/6PZ",
+    "listPriceUSD": 30.48,
+    "category": "SUAVIZANTE",
+    "brand": "DOWNY",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p33",
+    "sku": "SUA0030",
+    "name": "DOWNY PUREZA SILVESTRE 730 ML C/9 PZS",
+    "listPriceUSD": 11,
+    "category": "SUAVIZANTE",
+    "brand": "DOWNY",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p34",
+    "sku": "SUA0014",
+    "name": "SUAVITEL ANOCH 850 ML C/12 PZS",
+    "listPriceUSD": 14.35,
+    "category": "SUAVIZANTE",
+    "brand": "SUAVITEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p35",
+    "sku": "SUA0015",
+    "name": "SUAVITEL ANOCH COMPLETE 700 ML C/12 PZS",
+    "listPriceUSD": 14.35,
+    "category": "SUAVIZANTE",
+    "brand": "SUAVITEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p36",
+    "sku": "SUA0016",
+    "name": "SUAVITEL AQUA COMPLETE 2.8 LT C/4 PZS",
+    "listPriceUSD": 15,
+    "category": "SUAVIZANTE",
+    "brand": "SUAVITEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p37",
+    "sku": "SUA0017",
+    "name": "SUAVITEL BABY ANTIBAC 850 ML C/12 PZS",
+    "listPriceUSD": 14.2,
+    "category": "SUAVIZANTE",
+    "brand": "SUAVITEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p38",
+    "sku": "SUA0018",
+    "name": "SUAVITEL COMPLETE PRIVA 700 ML C/12 PZS",
+    "listPriceUSD": 14.2,
+    "category": "SUAVIZANTE",
+    "brand": "SUAVITEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p39",
+    "sku": "SUA0019",
+    "name": "SUAVITEL CUIDADO DIARIO 8.5 LT C/2 PZS",
+    "listPriceUSD": 18,
+    "category": "SUAVIZANTE",
+    "brand": "SUAVITEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p40",
+    "sku": "SUA0020",
+    "name": "SUAVITEL CUI SUP MANZANA 740 ML C/16 PZS",
+    "listPriceUSD": 14.11,
+    "category": "SUAVIZANTE",
+    "brand": "SUAVITEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p41",
+    "sku": "SUA0021",
+    "name": "SUAVITEL FRESCA PRIM 2.8 LT C/4 PZS",
+    "listPriceUSD": 22.45,
+    "category": "SUAVIZANTE",
+    "brand": "SUAVITEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p42",
+    "sku": "SUA0022",
+    "name": "SUAVITEL FRESCA PRIM 3 LT C/4 PZS",
+    "listPriceUSD": 19.91,
+    "category": "SUAVIZANTE",
+    "brand": "SUAVITEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p43",
+    "sku": "SUA0023",
+    "name": "SUAVITEL FRESCA PRIM 450 ML C/12 PZS",
+    "listPriceUSD": 9.18,
+    "category": "SUAVIZANTE",
+    "brand": "SUAVITEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p44",
+    "sku": "SUA0024",
+    "name": "SUAVITEL FRESCA PRIM 850 ML C/12 PZS",
+    "listPriceUSD": 14.2,
+    "category": "SUAVIZANTE",
+    "brand": "SUAVITEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p45",
+    "sku": "SUA0025",
+    "name": "SUAVITEL SOL 3 LT C/4 PZS",
+    "listPriceUSD": 19.91,
+    "category": "SUAVIZANTE",
+    "brand": "SUAVITEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p46",
+    "sku": "SUA0026",
+    "name": "SUAVITEL SOL 450 ML C/12 PZS",
+    "listPriceUSD": 8.5,
+    "category": "SUAVIZANTE",
+    "brand": "SUAVITEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p47",
+    "sku": "SUA0027",
+    "name": "SUAVITEL SOL 850 ML C/12 PZS",
+    "listPriceUSD": 14.72,
+    "category": "SUAVIZANTE",
+    "brand": "SUAVITEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p48",
+    "sku": "SUA0028",
+    "name": "SUAVITEL SOL COMPLETE 700 ML C/12 PZS",
+    "listPriceUSD": 14.75,
+    "category": "SUAVIZANTE",
+    "brand": "SUAVITEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p49",
+    "sku": "SUA0031",
+    "name": "SUAVITEL PRIMAVERAL REG 1L C/12 PZS",
+    "listPriceUSD": 14.83,
+    "category": "SUAVIZANTE",
+    "brand": "SUAVITEL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p50",
+    "sku": "JLT0001",
+    "name": "JAB LIQ AXION LIMON 1.4L C/6 PZS",
+    "listPriceUSD": 18.28,
+    "category": "LAVATRASTE",
+    "brand": "AXION",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p51",
+    "sku": "JLT0002",
+    "name": "JAB LIQ AXION LIMON 400 ML C/15",
+    "listPriceUSD": 12.27,
+    "category": "LAVATRASTE",
+    "brand": "AXION",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p52",
+    "sku": "JLT0013",
+    "name": "JAB LIQ AXION LIMON 400ML C/12 PZS",
+    "listPriceUSD": 12.27,
+    "category": "LAVATRASTE",
+    "brand": "AXION",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p53",
+    "sku": "JLT0003",
+    "name": "JAB LIQ AXION LIMON 640ML C/12 PZS",
+    "listPriceUSD": 16.5,
+    "category": "LAVATRASTE",
+    "brand": "AXION",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p54",
+    "sku": "JLT0004",
+    "name": "JAB LIQ AXION LIMON 900ML C/12 PZS",
+    "listPriceUSD": 27,
+    "category": "LAVATRASTE",
+    "brand": "AXION",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p55",
+    "sku": "JLT0008",
+    "name": "JAB LIQ SALVO LIMON 1.4L C/9 PZS",
+    "listPriceUSD": 32.82,
+    "category": "LAVATRASTE",
+    "brand": "SALVO",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p56",
+    "sku": "JLT0009",
+    "name": "JAB LIQ SALVO LIMON 300 ML C/12 PZS",
+    "listPriceUSD": 9.96,
+    "category": "LAVATRASTE",
+    "brand": "SALVO",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p57",
+    "sku": "JLT0015",
+    "name": "JAB LIQ SALVO LIMON 300 ML C/14 PZS",
+    "listPriceUSD": 10.42,
+    "category": "LAVATRASTE",
+    "brand": "SALVO",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p58",
+    "sku": "JLT0006",
+    "name": "JAB LIQ SALVO LIMON 500ML C/10 PZS",
+    "listPriceUSD": 13.02,
+    "category": "LAVATRASTE",
+    "brand": "SALVO",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p59",
+    "sku": "JLT0010",
+    "name": "JAB LIQ SALVO LIMON 750ML C/12 PZS",
+    "listPriceUSD": 24.56,
+    "category": "LAVATRASTE",
+    "brand": "SALVO",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p60",
+    "sku": "JLT0007",
+    "name": "JAB LIQ SALVO LIMON 900 ML C/12 PZS",
+    "listPriceUSD": 27.5,
+    "category": "LAVATRASTE",
+    "brand": "SALVO",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p61",
+    "sku": "JLT0012",
+    "name": "JAB LIQ SALVO PWR CLEAN 2.6L C/6 PZS",
+    "listPriceUSD": 36.67,
+    "category": "LAVATRASTE",
+    "brand": "SALVO",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p62",
+    "sku": "JLT0016",
+    "name": "JAB POLVO AXION LIMON 720G C/18 PZS",
+    "listPriceUSD": 35.96,
+    "category": "LAVATRASTE",
+    "brand": "AXION",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p63",
+    "sku": "ACC0002",
+    "name": "SAVILE AC ALM VIT Y SAB 700ML C/12 PZS",
+    "listPriceUSD": 23.98,
+    "category": "ACONDICIONADOR",
+    "brand": "SAVILE",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p64",
+    "sku": "ACC0001",
+    "name": "SAVILE AC COLAG Y SAB 700ML C/12 PZS",
+    "listPriceUSD": 23.98,
+    "category": "ACONDICIONADOR",
+    "brand": "SAVILE",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p65",
+    "sku": "SHA0001",
+    "name": "SAVILE SH ACEI DE ARG 700ML C/12 PZS",
+    "listPriceUSD": 23.98,
+    "category": "SHAMPOO",
+    "brand": "SAVILE",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p66",
+    "sku": "SHA0002",
+    "name": "SAVILE SH ACEI DE COCO 700ML C/12 PZS",
+    "listPriceUSD": 23.98,
+    "category": "SHAMPOO",
+    "brand": "SAVILE",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p67",
+    "sku": "SHA0003",
+    "name": "SAVILE SH AGUACATE 2EN1 700ML C/12 PZS",
+    "listPriceUSD": 23.98,
+    "category": "SHAMPOO",
+    "brand": "SAVILE",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p68",
+    "sku": "SHA0004",
+    "name": "SAVILE SH ALMENDRA 700ML C/12 PZS",
+    "listPriceUSD": 23.98,
+    "category": "SHAMPOO",
+    "brand": "SAVILE",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p69",
+    "sku": "SHA0005",
+    "name": "SAVILE SH BIOTINA 700ML C/12 PZS",
+    "listPriceUSD": 23.98,
+    "category": "SHAMPOO",
+    "brand": "SAVILE",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p70",
+    "sku": "SHA0006",
+    "name": "SAVILE SH CELULAS MADRE 700ML C/12 PZS",
+    "listPriceUSD": 23.98,
+    "category": "SHAMPOO",
+    "brand": "SAVILE",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p71",
+    "sku": "SHA0007",
+    "name": "SAVILE SH CHILE 2EN1 700ML C/12 PZS",
+    "listPriceUSD": 23.98,
+    "category": "SHAMPOO",
+    "brand": "SAVILE",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p72",
+    "sku": "SHA0008",
+    "name": "SAVILE SH COLAGENO 700ML C/12 PZS",
+    "listPriceUSD": 23.98,
+    "category": "SHAMPOO",
+    "brand": "SAVILE",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p73",
+    "sku": "SHA0009",
+    "name": "SAVILE SH LISO DESLU KERA 700ML C/12 PZS",
+    "listPriceUSD": 23.98,
+    "category": "SHAMPOO",
+    "brand": "SAVILE",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p74",
+    "sku": "SHA0010",
+    "name": "SAVILE SH MIEL 2EN1 700ML C/12 PZS",
+    "listPriceUSD": 23.98,
+    "category": "SHAMPOO",
+    "brand": "SAVILE",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p75",
+    "sku": "SHA0011",
+    "name": "SAVILE SH NOPAL 2EN1 700ML C/12 PZS",
+    "listPriceUSD": 23.98,
+    "category": "SHAMPOO",
+    "brand": "SAVILE",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p76",
+    "sku": "CRP0001",
+    "name": "SEDAL CREMA P ANTINUDOS 300ML C/12 PZS",
+    "listPriceUSD": 28.75,
+    "category": "CREMA PEINAR",
+    "brand": "SEDAL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p77",
+    "sku": "CRP0002",
+    "name": "SEDAL CREMA P LISO PERF 300ML C/12 PZS",
+    "listPriceUSD": 28.75,
+    "category": "CREMA PEINAR",
+    "brand": "SEDAL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p78",
+    "sku": "CRP0003",
+    "name": "SEDAL CREMA P REST INST 300ML C/12 PZS",
+    "listPriceUSD": 28.75,
+    "category": "CREMA PEINAR",
+    "brand": "SEDAL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p79",
+    "sku": "CRP0004",
+    "name": "SEDAL CREMA P RIZOS DEF 300ML C/12 PZS",
+    "listPriceUSD": 28.22,
+    "category": "CREMA PEINAR",
+    "brand": "SEDAL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p80",
+    "sku": "SHA0012",
+    "name": "SEDAL SH CERAMIDAS 300ML C/12 PZS",
+    "listPriceUSD": 28.22,
+    "category": "SHAMPOO",
+    "brand": "SEDAL",
+    "costMXN": 0,
+    "lastUpdated": null
+  },
+  {
+    "id": "p81",
+    "sku": "SHA0013",
+    "name": "SEDAL SH LISO PERFECTO 300ML C/12 PZS",
+    "listPriceUSD": 28.75,
+    "category": "SHAMPOO",
+    "brand": "SEDAL",
+    "costMXN": 0,
+    "lastUpdated": null
+  }
+]
