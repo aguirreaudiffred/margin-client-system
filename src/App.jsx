@@ -2,11 +2,13 @@ import{useState,useRef,useEffect,useCallback}from"react";
 import productsSeed from "./data/products.json";
 import ordersSeed from "./data/orders.json";
 import sellersSeed from "./data/sellers.json";
-import{enrichOrderResult,MAX_CIRCULATION_LBS}from"./lib/orderCalc.js";
+import{enrichOrderResult,MAX_CIRCULATION_LBS,fmtKg,fmtLbs}from"./lib/orderCalc.js";
+import{fmtDualWeight,normalizeProductWeight}from"./lib/weightUnits.js";
+import{readCatalogFile,mergeCatalogImport,parseWeightsCsv}from"./lib/catalogImport.js";
 
 const LS={orders:"mcs_orders",products:"mcs_products",sellers:"mcs_sellers"};
 const loadLS=(key,fallback)=>{try{const r=localStorage.getItem(key);if(r)return JSON.parse(r);}catch(e){}return fallback;};
-const fmtLbs=n=>`${(n||0).toLocaleString("en-US",{maximumFractionDigits:0})} lbs`;
+const normProds=(arr)=>(arr||[]).map(normalizeProductWeight);
 
 
 const fU=n=>new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:2}).format(n||0);
@@ -28,7 +30,7 @@ const WeightBanner=({summary})=>{
   const box=st==="over"?"nr":st==="under"?"nb":st==="ok"?"ng":"ni";
   return(<div className={box} style={{marginBottom:12}}>
     <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",flexWrap:"wrap",gap:8,marginBottom:8}}>
-      <div><b>PESO EU</b> · {fmtLbs(summary.totalWeightLbs)} / {fmtLbs(summary.maxWeightLbs||MAX_CIRCULATION_LBS)}</div>
+      <div><b>PESO EU</b> · {fmtDualWeight(summary.totalWeightKg,summary.totalWeightLbs)} / {fmtDualWeight(summary.maxWeightKg,summary.maxWeightLbs||MAX_CIRCULATION_LBS)}</div>
       <div style={{fontSize:9,color:bar}}>{pct.toFixed(1)}% capacidad</div>
     </div>
     <div className="mb" style={{height:6,marginBottom:8}}><div className="mf" style={{width:`${pct}%`,height:6,background:bar,borderRadius:2}}/></div>
@@ -57,7 +59,8 @@ const Tip=({active,payload,label})=>{
 
 export default function App(){
   const[tab,setTab]=useState("dash");
-  const[prods,setProds]=useState(()=>loadLS(LS.products,productsSeed));
+  const[prods,setProds]=useState(()=>normProds(loadLS(LS.products,productsSeed)));
+  const[importMsg,setImportMsg]=useState(null);
   const[sellers,setSellers]=useState(()=>loadLS(LS.sellers,sellersSeed));
   const[orders,setOrders]=useState(()=>loadLS(LS.orders,ordersSeed));
   const[R,setR]=useState(null);
@@ -73,6 +76,7 @@ export default function App(){
   const[pedidoSellerId,setPedidoSellerId]=useState("");
   const fRef=useRef();
   const wRef=useRef();
+  const catImportRef=useRef();
   // confirm
   const[showC,setShowC]=useState(false);
   const[cData,setCData]=useState({sellerId:"",client:"",zone:""});
@@ -87,7 +91,7 @@ export default function App(){
   // catalog
   const[eProd,setEProd]=useState(null);
   const[showAP,setShowAP]=useState(false);
-  const[nProd,setNProd]=useState({sku:"",name:"",costMXN:"",listPriceUSD:"",category:"",brand:"",weightLbs:""});
+  const[nProd,setNProd]=useState({sku:"",name:"",costMXN:"",listPriceUSD:"",category:"",brand:"",weight:"",weightUnit:"kg"});
   const[catSrch,setCatSrch]=useState("");
   const[catCat,setCatCat]=useState("all");
   // sellers
@@ -148,7 +152,7 @@ export default function App(){
   const doAnalyze=async(input)=>{
     setOErr(null);setORes(null);setOLoad(true);
     try{
-      const pl=prods.map(p=>`${p.sku}|${p.name}|lista:$${p.listPriceUSD}|costo:$${p.costMXN}MXN|peso:${p.weightLbs||0}lbs/caja`).join("\n");
+      const pl=prods.map(p=>{const n=normalizeProductWeight(p);return`${p.sku}|${p.name}|lista:$${p.listPriceUSD}|costo:$${p.costMXN}MXN|peso:${n.weightKg}kg/${n.weightLbs}lbs/caja`;}).join("\n");
       const prompt=`Sistema márgenes Formexa USA. TC:1 USD=${xr} MXN. Límite peso EU: ${MAX_CIRCULATION_LBS} lbs por pedido.
 CATALOGO:
 ${pl}
@@ -169,21 +173,41 @@ SOLO JSON:
   },[prods,xr,txt]);
 
   const importWeightsFile=useCallback(async(file)=>{
-    const text=await file.text();
-    const map={};
-    text.split(/\r?\n/).forEach((line,i)=>{
-      const t=line.trim();
-      if(!t||i===0&&/sku|clave/i.test(t))return;
-      const parts=t.split(/[,;\t]/).map(x=>x.trim().replace(/^"|"$/g,""));
-      if(parts.length>=2){const sku=parts[0];const w=parseFloat(parts[1]);if(sku&&!Number.isNaN(w))map[sku]=w;}
-    });
-    const n=Object.keys(map).length;
-    if(!n)return;
-    setProds(prev=>{
-      const next=prev.map(p=>map[p.sku]!=null?{...p,weightLbs:map[p.sku]}:p);
-      setORes(r=>r?enrichOrderResult(r,next):r);
-      return next;
-    });
+    setImportMsg(null);
+    try{
+      let map={},errors=[];
+      if(file.name.toLowerCase().endsWith(".xlsx")||file.name.toLowerCase().endsWith(".xls")){
+        const {rows,errors:err}=await readCatalogFile(file);
+        errors=err;
+        rows.forEach(r=>{map[r.sku]=r;});
+      }else{
+        const text=await file.text();
+        ({map,errors}=parseWeightsCsv(text));
+      }
+      if(errors?.length&&!Object.keys(map).length){setImportMsg(errors.join(" "));return;}
+      const n=Object.keys(map).length;
+      if(!n){setImportMsg("No se encontraron SKUs con peso");return;}
+      setProds(prev=>{
+        const next=prev.map(p=>{const w=map[p.sku];return w?normalizeProductWeight({...p,...w}):p;});
+        setORes(r=>r?enrichOrderResult(r,next):r);
+        setImportMsg(`✓ Pesos actualizados en ${n} SKU`);
+        return next;
+      });
+    }catch(e){setImportMsg("Error importando: "+e.message);}
+  },[]);
+
+  const importCatalogFile=useCallback(async(file)=>{
+    setImportMsg(null);
+    try{
+      const {rows,errors}=await readCatalogFile(file);
+      if(errors.length&&!rows.length){setImportMsg(errors.join(" "));return;}
+      setProds(prev=>{
+        const next=mergeCatalogImport(prev,rows);
+        setORes(r=>r?enrichOrderResult(r,next):r);
+        setImportMsg(`✓ ${rows.length} productos en catálogo (${file.name})`);
+        return next;
+      });
+    }catch(e){setImportMsg("Error: "+e.message);}
   },[]);
 
   const confirmOrder=()=>{
@@ -445,7 +469,7 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
                     <td style={{fontSize:10}}>{it.productName}{it.matchedProduct&&it.matchedProduct!==it.productName&&<div style={{fontSize:7.5,color:"#3a3a4a"}}>→{it.matchedProduct}</div>}</td>
                     <td style={{color:"#f0a500",fontSize:9}}>{it.sku||"—"}</td>
                     <td>{it.quantity}</td>
-                    <td style={{color:it.weightLbs>0?"#6c8dfa":"#555",fontSize:9}}>{it.weightLbs>0?fmtLbs(it.weightLbs):"—"}</td>
+                    <td style={{color:it.weightLbs>0?"#6c8dfa":"#555",fontSize:8.5}}>{it.weightLbs>0?fmtDualWeight(it.weightKg,it.weightLbs):"—"}</td>
                     <td style={{color:it.clientPriceUSD<(it.costUSD||0)?"#ff6060":"#d8d4c8"}}>{fU(it.clientPriceUSD)}</td>
                     <td style={{color:"#444"}}>{fU(it.listPriceUSD)}</td>
                     <td style={{color:"#333"}}>{it.costUSD>0?fU(it.costUSD):"—"}</td>
@@ -489,7 +513,7 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
                   </td>
                   <td style={{color:"#3a3a4a",fontSize:9}}>{o.folio||"—"}</td>
                   <td style={{color:"#f0a500",fontWeight:500}}>{fU(o.summary.totalRevenueUSD)}</td>
-                  <td style={{color:o.summary?.weightStatus==="over"?"#ff6060":"#6c8dfa",fontSize:9}}>{o.summary?.totalWeightLbs>0?fmtLbs(o.summary.totalWeightLbs):"—"}</td>
+                  <td style={{color:o.summary?.weightStatus==="over"?"#ff6060":"#6c8dfa",fontSize:8.5}}>{o.summary?.totalWeightLbs>0?fmtDualWeight(o.summary.totalWeightKg,o.summary.totalWeightLbs):"—"}</td>
                   <td style={{color:"#555"}}>{o.items.length}</td>
                   <td style={{color:"#252535",fontSize:9}}>{o.exchangeRate}</td>
                   <td><button className="ghost" style={{padding:"3px 9px",fontSize:7.5}} onClick={e=>{e.stopPropagation();const en=enrichOrderResult({orderItems:o.items,summary:o.summary||{}},prods);setSelO({...o,items:en.orderItems,summary:en.summary});}}>Ver</button></td>
@@ -622,13 +646,19 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12,flexWrap:"wrap",gap:10}}>
             <div className="slbl" style={{marginBottom:0}}>Catálogo · {prods.length} SKUs (ABR 2026)</div>
             <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
-              <button className="ghost" onClick={()=>wRef.current?.click()}>↑ Importar pesos CSV</button>
-              <input ref={wRef} type="file" style={{display:"none"}} accept=".csv,.txt" onChange={e=>{if(e.target.files[0])importWeightsFile(e.target.files[0]);e.target.value="";}}/>
+              <button className="btn" onClick={()=>catImportRef.current?.click()}>📥 Importar Excel/CSV</button>
+              <input ref={catImportRef} type="file" style={{display:"none"}} accept=".csv,.txt,.xlsx,.xls" onChange={e=>{if(e.target.files[0])importCatalogFile(e.target.files[0]);e.target.value="";}}/>
+              <button className="ghost" onClick={()=>wRef.current?.click()}>Solo pesos</button>
+              <input ref={wRef} type="file" style={{display:"none"}} accept=".csv,.txt,.xlsx,.xls" onChange={e=>{if(e.target.files[0])importWeightsFile(e.target.files[0]);e.target.value="";}}/>
               <button className="ghost" onClick={()=>setTab("costos")}>Costos</button>
               <button className="btn" onClick={()=>setShowAP(!showAP)}>{showAP?"Cancelar":"+ Agregar"}</button>
             </div>
           </div>
-          <div className="ni" style={{marginBottom:12,fontSize:8.5}}>Peso = lbs por caja × cantidad. Límite EU: {fmtLbs(MAX_CIRCULATION_LBS)}. CSV: <code>SKU,peso_lbs</code> (ej. DET0008,12.5)</div>
+          <div className="ni" style={{marginBottom:12,fontSize:8.5,lineHeight:1.5}}>
+            <b>Limpieza:</b> peso en <b>kg</b> en Excel · <b>Velas:</b> peso en <b>lbs</b>. En pedidos verás <b>kg y lbs</b>. Límite EU: {fmtDualWeight(19958,MAX_CIRCULATION_LBS)}.
+            <div style={{marginTop:6}}>Columnas: <code>SKU, Nombre, Categoria, Peso, Unidad</code> (unidad = kg o lbs). Ver <code>docs/IMPORTAR_EXCEL.md</code></div>
+          </div>
+          {importMsg&&<div className={importMsg.startsWith("✓")?"ng":"nr"} style={{marginBottom:12,fontSize:8.5}}>{importMsg}</div>}
           <div style={{display:"flex",gap:10,marginBottom:12,flexWrap:"wrap"}}>
             <input className="inp" style={{maxWidth:240}} placeholder="SKU o nombre…" value={catSrch} onChange={e=>setCatSrch(e.target.value)}/>
             <select className="sel" style={{width:"auto"}} value={catCat} onChange={e=>setCatCat(e.target.value)}>
@@ -644,13 +674,14 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
               ))}
               <div><div className="lbl">Costo MXN</div><input className="inp" type="number" value={nProd.costMXN} onChange={e=>setNProd({...nProd,costMXN:e.target.value})}/></div>
               <div><div className="lbl">Lista USD</div><input className="inp" type="number" value={nProd.listPriceUSD} onChange={e=>setNProd({...nProd,listPriceUSD:e.target.value})}/></div>
-              <div><div className="lbl">Peso lbs/caja</div><input className="inp" type="number" step="0.01" value={nProd.weightLbs} onChange={e=>setNProd({...nProd,weightLbs:e.target.value})}/></div>
+              <div><div className="lbl">Peso por caja</div><input className="inp" type="number" step="0.01" value={nProd.weight} onChange={e=>setNProd({...nProd,weight:e.target.value})}/></div>
+              <div><div className="lbl">Unidad</div><select className="sel" value={nProd.weightUnit} onChange={e=>setNProd({...nProd,weightUnit:e.target.value})}><option value="kg">kg (limpieza)</option><option value="lbs">lbs (velas)</option></select></div>
             </div>
-            <button className="btn" onClick={()=>{if(!nProd.sku||!nProd.name)return;setProds(p=>[...p,{...nProd,id:uid(),costMXN:parseFloat(nProd.costMXN)||0,listPriceUSD:parseFloat(nProd.listPriceUSD)||0,weightLbs:parseFloat(nProd.weightLbs)||0}]);setNProd({sku:"",name:"",costMXN:"",listPriceUSD:"",category:"",brand:"",weightLbs:""});setShowAP(false);}}>Guardar</button>
+            <button className="btn" onClick={()=>{if(!nProd.sku||!nProd.name)return;const row=normalizeProductWeight({...nProd,id:uid(),costMXN:parseFloat(nProd.costMXN)||0,listPriceUSD:parseFloat(nProd.listPriceUSD)||0,weight:parseFloat(nProd.weight)||0,weightUnit:nProd.weightUnit});setProds(p=>[...p,row]);setNProd({sku:"",name:"",costMXN:"",listPriceUSD:"",category:"",brand:"",weight:"",weightUnit:"kg"});setShowAP(false);}}>Guardar</button>
           </div>}
           <div className="ovfl" style={{background:"#0d0d1c",border:"1px solid #181826"}}>
             <table className="tbl">
-              <thead><tr><th>SKU</th><th>Producto</th><th>Cat.</th><th>Marca</th><th>Peso lbs/caja</th><th>Costo MXN</th><th>Costo USD</th><th>Lista USD</th><th>Actualizado</th><th>Margen</th><th></th></tr></thead>
+              <thead><tr><th>SKU</th><th>Producto</th><th>Cat.</th><th>Marca</th><th>Peso/caja</th><th>Costo MXN</th><th>Costo USD</th><th>Lista USD</th><th>Actualizado</th><th>Margen</th><th></th></tr></thead>
               <tbody>{pFilt.map(p=>{
                 const cu=p.costMXN>0?p.costMXN/xr:null;
                 const m=cu!=null?(p.listPriceUSD-cu)/p.listPriceUSD:null;
@@ -660,13 +691,13 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
                   <td style={{fontSize:10}}>{ed?<input className="inp" value={eProd.name} onChange={e=>setEProd({...eProd,name:e.target.value})}/>:p.name}</td>
                   <td style={{color:"#3a3a4a",fontSize:8.5}}>{p.category}</td>
                   <td style={{color:"#252535",fontSize:8.5}}>{p.brand}</td>
-                  <td style={{color:p.weightLbs>0?"#6c8dfa":"#252535",fontSize:9}}>{ed?<input className="inp" type="number" step="0.01" style={{width:70}} value={eProd.weightLbs??0} onChange={e=>setEProd({...eProd,weightLbs:parseFloat(e.target.value)||0})}/>:p.weightLbs>0?fmtLbs(p.weightLbs):"—"}</td>
+                  <td style={{color:p.weightLbs>0?"#6c8dfa":"#252535",fontSize:8}}>{ed?(<div style={{display:"flex",gap:4,flexWrap:"wrap"}}><input className="inp" type="number" step="0.01" style={{width:55}} value={eProd._wVal??(eProd.weightUnit==="kg"?eProd.weightKg:eProd.weightLbs)} onChange={e=>{const v=parseFloat(e.target.value)||0;const u=eProd.weightUnit||"kg";setEProd({...eProd,_wVal:v,weightUnit:u,weight:v,weightKg:u==="kg"?v:undefined,weightLbs:u==="lbs"?v:undefined});}}/><select className="sel" style={{width:52}} value={eProd.weightUnit||"kg"} onChange={e=>setEProd({...eProd,weightUnit:e.target.value,_wVal:undefined})}><option value="kg">kg</option><option value="lbs">lbs</option></select></div>):(()=>{const n=normalizeProductWeight(p);return n.weightLbs>0?<span title={n.weightUnit}>{fmtDualWeight(n.weightKg,n.weightLbs)}</span>:"—";})()}</td>
                   <td style={{color:p.costMXN>0?"#d8d4c8":"#252535"}}>{ed?<input className="inp" type="number" style={{width:85}} value={eProd.costMXN} onChange={e=>setEProd({...eProd,costMXN:parseFloat(e.target.value)})}/>:p.costMXN>0?fM(p.costMXN):<span style={{fontSize:8}}>Pendiente</span>}</td>
                   <td style={{color:"#333",fontSize:9}}>{cu?fU(cu):"—"}</td>
                   <td>{ed?<input className="inp" type="number" style={{width:75}} value={eProd.listPriceUSD} onChange={e=>setEProd({...eProd,listPriceUSD:parseFloat(e.target.value)})}/>:fU(p.listPriceUSD)}</td>
                   <td style={{color:"#252535",fontSize:8.5}}>{p.lastUpdated||"—"}</td>
                   <td>{m!=null?<div style={{display:"flex",alignItems:"center",gap:6}}><div className="mb" style={{width:40}}><div className="mf" style={{width:`${Math.max(0,Math.min(100,m*100))}%`,background:mc(m)}}/></div><span style={{fontSize:9,color:mc(m)}}>{pct(m)}</span></div>:<span style={{color:"#252535",fontSize:8}}>—</span>}</td>
-                  <td>{ed?<div style={{display:"flex",gap:5}}><button className="btn" style={{padding:"3px 8px",fontSize:7.5}} onClick={()=>{setProds(ps=>ps.map(x=>x.id===eProd.id?eProd:x));setEProd(null);}}>✓</button><button className="ghost" style={{padding:"3px 8px"}} onClick={()=>setEProd(null)}>✕</button></div>:<button className="ghost" style={{padding:"3px 9px",fontSize:7.5}} onClick={()=>setEProd({...p})}>Editar</button>}</td>
+                  <td>{ed?<div style={{display:"flex",gap:5}}><button className="btn" style={{padding:"3px 8px",fontSize:7.5}} onClick={()=>{setProds(ps=>ps.map(x=>x.id===eProd.id?normalizeProductWeight({...eProd,weight:eProd._wVal??(eProd.weightUnit==="kg"?eProd.weightKg:eProd.weightLbs)}):x));setEProd(null);}}>✓</button><button className="ghost" style={{padding:"3px 8px"}} onClick={()=>setEProd(null)}>✕</button></div>:<button className="ghost" style={{padding:"3px 9px",fontSize:7.5}} onClick={()=>setEProd({...p})}>Editar</button>}</td>
                 </tr>);
               })}</tbody>
             </table>
