@@ -1,5 +1,6 @@
 import { useState, useRef, useMemo } from "react";
 import { readNotionSalesFile, mergeSales, PRODUCT_CATEGORIES } from "../lib/salesImport.js";
+import { fetchNotionSales } from "../lib/notionSync.js";
 import { filterSales, summarizeSales } from "../lib/salesAnalytics.js";
 
 const fU = (n) =>
@@ -30,6 +31,7 @@ export default function SalesPanel({ sales, setSales, salesMeta, setSalesMeta, s
   const [importMode, setImportMode] = useState("merge");
   const [importMsg, setImportMsg] = useState(null);
   const [importing, setImporting] = useState(false);
+  const [syncing, setSyncing] = useState(false);
   const fileRef = useRef();
 
   const filtered = useMemo(
@@ -39,6 +41,33 @@ export default function SalesPanel({ sales, setSales, salesMeta, setSalesMeta, s
   const sum = useMemo(() => summarizeSales(filtered), [filtered]);
   const totalProfit = useMemo(() => filtered.reduce((a, s) => a + (s.profitUSD || 0), 0), [filtered]);
   const profitPct = sum.total > 0 ? totalProfit / sum.total : 0;
+
+  const handleNotionSync = async () => {
+    setSyncing(true);
+    setImportMsg(null);
+    try {
+      const data = await fetchNotionSales();
+      const lines = data.lines;
+      setSales((prev) => mergeSales(prev, lines, importMode));
+      setSalesMeta({
+        lastImport: new Date().toISOString(),
+        reportLabel: "Notion API",
+        batchId: lines[0]?.batchId,
+        rowCount: lines.length,
+        mode: importMode,
+        source: "notion-api",
+      });
+      setImportMsg(`✓ ${lines.length} ventas desde Notion API (${importMode === "replace" ? "reemplazo" : "fusionado"})`);
+      setView("resumen");
+    } catch (e) {
+      setImportMsg(
+        e.message +
+          ". En GitHub Pages sube el Excel; la API vive en Vercel con NOTION_TOKEN y NOTION_DATABASE_ID.",
+      );
+    } finally {
+      setSyncing(false);
+    }
+  };
 
   const handleImport = async (file) => {
     setImporting(true);
@@ -141,13 +170,19 @@ export default function SalesPanel({ sales, setSales, salesMeta, setSalesMeta, s
               Reemplazar todas las ventas
             </label>
           </div>
-          <button className="btn" disabled={importing} onClick={() => fileRef.current?.click()}>
-            {importing ? "Importando…" : "📥 Subir reporte Notion (.xlsx)"}
-          </button>
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+            <button className="btn" disabled={importing} onClick={() => fileRef.current?.click()}>
+              {importing ? "Importando…" : "📥 Subir reporte Notion (.xlsx)"}
+            </button>
+            <button className="btn" style={{ background: "#1a1a2e", borderColor: "#6c8dfa", color: "#6c8dfa" }} disabled={syncing || importing} onClick={handleNotionSync}>
+              {syncing ? "Sincronizando…" : "⟳ Sincronizar desde Notion API"}
+            </button>
+          </div>
           <input ref={fileRef} type="file" accept=".xlsx,.xls,.csv" style={{ display: "none" }} onChange={(e) => { if (e.target.files[0]) handleImport(e.target.files[0]); e.target.value = ""; }} />
           {importMsg && <div className={importMsg.startsWith("✓") ? "ng" : "nr"} style={{ marginTop: 12, fontSize: 8.5 }}>{importMsg}</div>}
-          <div className="ni" style={{ marginTop: 14, fontSize: 8 }}>
-            Paso 2 (próximo): conexión automática a Notion para agregar ventas sin subir archivo.
+          <div className="ni" style={{ marginTop: 14, fontSize: 8, lineHeight: 1.5 }}>
+            <b>API automática:</b> en Vercel → Settings → Environment Variables: <code>NOTION_TOKEN</code>, <code>NOTION_DATABASE_ID</code> (ID de la base del reporte).
+            La app en GitHub Pages puede usar <code>VITE_NOTION_SYNC_URL=https://margin-client-system.vercel.app/api/notion-sync</code> al hacer build.
           </div>
         </div>
       )}

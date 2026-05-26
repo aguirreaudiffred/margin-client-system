@@ -3,6 +3,18 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "rewrites": [
-    { "source": "/((?!assets/|data/).*)", "destination": "/index.html" }
+    { "source": "/api/(.*)", "destination": "/api/$1" }
+  ],
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://aguirreaudiffred.github.io/margin-client-system/",
+      "permanent": false
+    },
+    {
+      "source": "/((?!api/).*)",
+      "destination": "https://aguirreaudiffred.github.io/margin-client-system/$1",
+      "permanent": false
+    }
   ]
 }

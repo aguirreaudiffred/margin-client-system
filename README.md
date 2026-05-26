@@ -1,56 +1,50 @@
 # Margin & Client System
 
-Dashboard de márgenes, pedidos confirmados, catálogo de productos y vendedores (Formexa). Proyecto **independiente** de Sharp Picks / ClaudeCode.
+Dashboard de ventas Notion, márgenes estimados por tipo de producto, catálogo y vendedores (Formexa).
 
-## Requisitos
+## Link oficial (usa este)
 
-- Node.js 18+
-- npm
+**https://aguirreaudiffred.github.io/margin-client-system/**
+
+Debe verse en el encabezado: **FORMEXA USA LLC · Notion v4** y pestañas **Dashboard · Ventas · Catálogo** (sin Carlos/Laura/Roberto/Patricia).
+
+Recarga forzada si ves datos viejos: **Cmd + Shift + R** (Mac) o ventana privada.
+
+> `https://margin-client-system.vercel.app` redirige a GitHub Pages. La API de Notion sigue en Vercel: `/api/notion-sync`.
 
 ## Desarrollo local
 
 ```bash
 cd margin-client-system
 npm install
-cp .env.example .env.local   # opcional: VITE_ANTHROPIC_API_KEY para importar PDFs
+cp .env.example .env.local
 npm run dev
 ```
 
-Abre http://127.0.0.1:5174
+http://127.0.0.1:5174
 
-## Build
+## Actualizar ventas
+
+1. **Lunes:** Ventas → Actualizar reporte → sube el Excel de Notion.
+2. **Automático (paso 2):** botón *Sincronizar desde Notion API* (requiere token en Vercel).
+
+Regenerar seed desde Excel:
 
 ```bash
-npm run build
-npm run preview
+node scripts/import-notion-sales.mjs "/ruta/Notion Reporte....xlsx"
 ```
 
-## Origen
+## Márgenes estimados (sobre venta del reporte)
 
-La UI proviene de `margin-system.jsx`. Los datos de ejemplo van embebidos en `src/App.jsx`.
-
-## Web pública (usa este link)
-
-**https://margin-client-system.vercel.app**
-
-(Espera 2–3 segundos: primero carga la app, luego los datos y gráficos.)
-
-Alternativa: https://aguirreaudiffred.github.io/margin-client-system/
-
-Si no carga, sigue `DEPLOY.md`.
-
-### PDF / Claude (opcional)
-
-Vercel → proyecto → **Settings** → **Environment Variables**:
-
-| Name | Value |
-|------|--------|
-| `VITE_ANTHROPIC_API_KEY` | tu key de Anthropic |
-
-Guarda y **Redeploy** el último deployment.
+| Tipo | % |
+|------|---|
+| Velas | 23% |
+| Detergente | 6% |
+| Bebidas | 10% |
+| Mixto | 15% |
 
 ## Repositorio
 
 https://github.com/aguirreaudiffred/margin-client-system
 
-Proyecto independiente de Sharp Picks / ClaudeCode.
+Deploy: cada push a `main` publica GitHub Pages (workflow `.github/workflows/deploy-pages.yml`).
