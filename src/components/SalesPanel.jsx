@@ -106,8 +106,8 @@ export default function SalesPanel({ sales, setSales, salesMeta, setSalesMeta, s
             <div className="lbl">Vendedor</div>
             <select className="sel" style={{ width: "auto", minWidth: 160 }} value={fSeller} onChange={(e) => setFSeller(e.target.value)}>
               <option value="all">Todos</option>
-              {[...new Set(sales.map((s) => s.sellerName).filter(Boolean))].sort().map((n) => (
-                <option key={n} value={n}>{n}</option>
+              {sellers.map((s) => (
+                <option key={s.id} value={s.name}>{s.name}</option>
               ))}
               <option value="Sin asignar">Sin asignar</option>
             </select>

@@ -3,7 +3,6 @@
 const SELLER_ALIASES = {
   "luis miguel perez": "Luis Miguel Perez",
   "manuel fernandez": "Manuel Fernandez",
-  "alejandro aguirre": "Alejandro Aguirre",
 };
 
 export const PRODUCT_CATEGORIES = ["VELAS", "DETERGENTE", "BEBIDAS", "MIXTO", "OTRO"];

@@ -116,12 +116,14 @@ export default function App(){
 
   useEffect(()=>{
     try{
-      // Reset demo/local data so the UI matches reality:
-      // - only 2 sellers (Luis/Manuel)
-      // - sales come from Notion report
-      // - no invented orders
-      if(localStorage.getItem("mcs_version")!=="3"){
-        localStorage.setItem("mcs_version","3");
+      const allowed=new Set(sellersSeed.map(s=>s.name));
+      const sellersBad=()=>{
+        const cur=loadLS(LS.sellers,sellersSeed);
+        return !Array.isArray(cur)||cur.length!==2||cur.some(s=>!allowed.has(s.name));
+      };
+      const mustReset=localStorage.getItem("mcs_version")!=="4"||sellersBad();
+      if(mustReset){
+        localStorage.setItem("mcs_version","4");
         localStorage.setItem(LS.sellers,JSON.stringify(sellersSeed));
         localStorage.setItem(LS.orders,JSON.stringify([]));
         localStorage.setItem(LS.sales,JSON.stringify(salesSeedBundle?.lines||[]));
@@ -301,7 +303,7 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
             <div style={{fontFamily:"'Syne',sans-serif",fontSize:13,fontWeight:900,lineHeight:1.2}}>
               <span style={{color:"#d8d4c8"}}>Margin & Client </span><span style={{color:"#f0a500"}}>System</span>
             </div>
-            <div style={{fontSize:7,letterSpacing:3,color:"#181826",marginTop:1}}>FORMEXA USA LLC</div>
+            <div style={{fontSize:7,letterSpacing:3,color:"#181826",marginTop:1}}>FORMEXA USA LLC · Notion v4</div>
           </div>
           <nav style={{display:"flex",alignItems:"stretch",flexWrap:"nowrap",overflowX:"auto",WebkitOverflowScrolling:"touch",maxWidth:"100%"}}>
             {TABS.map(([k,v])=><button key={k} className={`tab ${tab===k?"on":""}`} onClick={()=>setTab(k)}>{v}</button>)}
