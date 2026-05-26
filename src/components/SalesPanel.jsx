@@ -24,7 +24,7 @@ const VIEWS = [
 ];
 
 export default function SalesPanel({ sales, setSales, salesMeta, setSalesMeta, sellers, R }) {
-  const [period, setPeriod] = useState("week");
+  const [period, setPeriod] = useState("all");
   const [view, setView] = useState("resumen");
   const [fSeller, setFSeller] = useState("all");
   const [fCat, setFCat] = useState("all");
@@ -41,6 +41,7 @@ export default function SalesPanel({ sales, setSales, salesMeta, setSalesMeta, s
   const sum = useMemo(() => summarizeSales(filtered), [filtered]);
   const totalProfit = useMemo(() => filtered.reduce((a, s) => a + (s.profitUSD || 0), 0), [filtered]);
   const profitPct = sum.total > 0 ? totalProfit / sum.total : 0;
+  const periodEmpty = sales.length > 0 && filtered.length === 0;
 
   const handleNotionSync = async () => {
     setSyncing(true);
@@ -128,6 +129,15 @@ export default function SalesPanel({ sales, setSales, salesMeta, setSalesMeta, s
           </button>
         ))}
       </div>
+
+      {periodEmpty && (
+        <div className="ni" style={{ marginBottom: 12, fontSize: 8.5, lineHeight: 1.5 }}>
+          Hay <b>{sales.length} POs</b> cargados, pero ninguno coincide con el filtro de fecha (
+          <b>{PERIODS.find(([k]) => k === period)?.[1] || period}</b>
+          ). Prueba <button type="button" className="ghost" style={{ padding: "2px 8px", fontSize: 8 }} onClick={() => setPeriod("all")}>Todo</button> o{" "}
+          <button type="button" className="ghost" style={{ padding: "2px 8px", fontSize: 8 }} onClick={() => setPeriod("month")}>Este mes</button>.
+        </div>
+      )}
 
       {view !== "actualizar" && (
         <div style={{ display: "flex", gap: 10, marginBottom: 14, flexWrap: "wrap" }}>

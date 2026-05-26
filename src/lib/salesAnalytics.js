@@ -25,10 +25,9 @@ export function filterSales(sales, { period = "all", from, to, seller, client, c
     if (client && client !== "all" && s.client !== client) return false;
     if (category && category !== "all" && s.productCategory !== category) return false;
     if (zone && zone !== "all" && (s.zone || "Texas") !== zone) return false;
-  if (!s.poDate) {
-      if (period === "all") return true;
-      return false;
-    }
+
+    if (!s.poDate) return period === "all";
+
     if (from && s.poDate < from) return false;
     if (to && s.poDate > to) return false;
     if (period === "today" && s.poDate !== today) return false;
