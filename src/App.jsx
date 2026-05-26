@@ -116,12 +116,20 @@ export default function App(){
 
   useEffect(()=>{
     try{
-      if(localStorage.getItem("mcs_version")!=="2"){
-        localStorage.setItem("mcs_version","2");
+      // Reset demo/local data so the UI matches reality:
+      // - only 2 sellers (Luis/Manuel)
+      // - sales come from Notion report
+      // - no invented orders
+      if(localStorage.getItem("mcs_version")!=="3"){
+        localStorage.setItem("mcs_version","3");
         localStorage.setItem(LS.sellers,JSON.stringify(sellersSeed));
-        localStorage.setItem(LS.orders,JSON.stringify(ordersSeed));
+        localStorage.setItem(LS.orders,JSON.stringify([]));
+        localStorage.setItem(LS.sales,JSON.stringify(salesSeedBundle?.lines||[]));
+        localStorage.setItem(LS.salesMeta,JSON.stringify(salesSeedBundle?.meta||null));
         setSellers(sellersSeed);
-        setOrders(ordersSeed);
+        setOrders([]);
+        setSales(salesSeedBundle?.lines||[]);
+        setSalesMeta(salesSeedBundle?.meta||null);
       }
     }catch(e){}
   },[]);
@@ -137,6 +145,9 @@ export default function App(){
   },[cData.sellerId]);
 
   const totalRev=orders.reduce((a,o)=>a+o.summary.totalRevenueUSD,0);
+  const salesTotal=sales.reduce((a,s)=>a+(s.amountUSD||0),0);
+  const salesProfit=sales.reduce((a,s)=>a+(s.profitUSD||0),0);
+  const salesProfitPct=salesTotal>0?salesProfit/salesTotal:0;
   const costsN=prods.filter(p=>p.costMXN>0).length;
 
   const filt=orders.filter(o=>{
@@ -275,7 +286,7 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
     return true;
   });
 
-  const TABS=[["dash","Dashboard"],["ventas","Ventas"],["costos","Cargar Costos"],["pedido","Nuevo Pedido"],["hist","Facturas"],["rep","Reportes"],["cat","Catálogo"],["vend","Equipo"]];
+  const TABS=[["dash","Dashboard"],["ventas","Ventas"],["cat","Catálogo"]];
 
   if(!R)return(<div className="app-loading"><span className="spin">↻</span>Cargando…</div>);
   const{BarChart,Bar,LineChart,Line,XAxis,YAxis,Tooltip,ResponsiveContainer,Cell,PieChart,Pie,Legend}=R;
@@ -315,66 +326,46 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
 
         {/* DASHBOARD */}
         {tab==="dash"&&<div className="fade">
-          <div className="slbl">Margin & Client System · Ene–May 2026</div>
-          {costsN===0&&<div className="ni" style={{marginBottom:16,display:"flex",gap:10,alignItems:"center"}}>
-            <span>💡</span>
-            <div>Carga el PDF de compras Alpha para ver márgenes reales. <button className="ghost" style={{padding:"2px 9px",fontSize:7.5,marginLeft:8}} onClick={()=>setTab("costos")}>Cargar →</button></div>
-          </div>}
+          <div className="slbl">Margin & Client System · Ventas Notion</div>
           <div className="g4" style={{marginBottom:18}}>
-            {[["FACTURACIÓN",fU(totalRev),"#d8d4c8","hist"],["VENTAS NOTION",fU(sales.reduce((a,s)=>a+(s.amountUSD||0),0)),"#6c8dfa","ventas"],["CLIENTES",`${new Set([...orders.map(o=>o.client),...sales.map(s=>s.client)]).size}`,"#c084fc","ventas"],["CATÁLOGO",`${prods.length} SKUs`,"#00c896","cat"]].map(([l,v,c,t])=>(
+            {[["VENTAS NOTION",fU(salesTotal),"#6c8dfa","ventas"],["GANANCIA EST.",fU(salesProfit),"#00c896","ventas"],["MARGEN EST.",pct(salesProfitPct),"#f0a500","ventas"],["CATÁLOGO",`${prods.length} SKUs`,"#00c896","cat"]].map(([l,v,c,t])=>(
               <div key={l} className="card" style={{cursor:"pointer"}} onClick={()=>setTab(t)}>
                 <div className="lbl">{l}</div>
                 <div style={{fontSize:22,color:c,fontWeight:300,marginTop:5}}>{v}</div>
               </div>
             ))}
           </div>
+          <div className="ni" style={{marginBottom:16,fontSize:8.5,lineHeight:1.5}}>
+            Utilidad estimada por tipo: <b>Velas 23%</b> · <b>Detergente 6%</b> · <b>Bebidas 10%</b> · <b>Mixto 15%</b>.
+          </div>
           <div className="g2" style={{marginBottom:16}}>
             <div className="card">
-              <div className="lbl" style={{marginBottom:10}}>Facturación Mensual (USD)</div>
-              <ChartShell h={140}><BarChart data={byM} barSize={22}>
-                  <XAxis dataKey="month" tick={{fill:"#3a3a4a",fontSize:9}} axisLine={false} tickLine={false}/>
-                  <YAxis hide/><Tooltip content={<Tip/>}/>
-                  <Bar dataKey="revenue" name="Venta" radius={[3,3,0,0]}>{byM.map((_,i)=><Cell key={i} fill={C[i%C.length]}/>)}</Bar>
-                </BarChart></ChartShell>
+              <div className="lbl" style={{marginBottom:10}}>Últimos POs (Notion)</div>
+              <div style={{fontSize:9.5,color:"#555",lineHeight:1.6}}>
+                {sales.slice(0,6).map((s,i)=>(
+                  <div key={s.id||i} style={{display:"flex",justifyContent:"space-between",gap:10,padding:"6px 0",borderBottom:"1px solid #0e0e1c"}}>
+                    <div style={{minWidth:0}}>
+                      <div style={{fontSize:10,color:"#d8d4c8",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{s.client}</div>
+                      <div style={{fontSize:7.5,color:"#3a3a4a"}}>{s.poDate||"—"} · {s.productCategory||"—"} · {s.sellerName||"Sin asignar"}</div>
+                    </div>
+                    <div style={{textAlign:"right"}}>
+                      <div style={{color:"#f0a500"}}>{fU(s.amountUSD)}</div>
+                      <div style={{color:"#00c896",fontSize:8.5}}>{fU(s.profitUSD||0)}</div>
+                    </div>
+                  </div>
+                ))}
+                {!sales.length&&<div>Sube el reporte en la pestaña <b>Ventas</b>.</div>}
+              </div>
             </div>
             <div className="card">
-              <div className="lbl" style={{marginBottom:10}}>Venta por Cliente</div>
-              <ChartShell h={140}><BarChart data={byC.slice(0,5)} barSize={18} layout="vertical">
-                  <XAxis type="number" hide/><YAxis dataKey="name" type="category" tick={{fill:"#555",fontSize:8.5}} width={110} axisLine={false} tickLine={false}/>
-                  <Tooltip content={<Tip/>}/>
-                  <Bar dataKey="revenue" name="Venta" radius={[0,3,3,0]}>{byC.slice(0,5).map((_,i)=><Cell key={i} fill={C[i%C.length]}/>)}</Bar>
-                </BarChart></ChartShell>
-            </div>
-          </div>
-          <div className="g2">
-            <div>
-              <div className="slbl">Top Clientes</div>
-              <div style={{background:"#0d0d1c",border:"1px solid #181826"}}>
-                {byC.slice(0,5).map((c,i)=>(
-                  <div key={c.name} style={{display:"flex",alignItems:"center",gap:10,padding:"10px 14px",borderBottom:i<4?"1px solid #090914":"none"}}>
-                    <div style={{width:16,fontSize:11,color:i===0?"#f0a500":"#222"}}>{i===0?"★":i+1}</div>
-                    <div className="ava" style={{width:26,height:26,fontSize:9,background:C[i%C.length]}}>{c.name[0]}</div>
-                    <div style={{flex:1}}><div style={{fontSize:10.5}}>{c.name}</div><div style={{fontSize:7.5,color:"#3a3a4a"}}>{c.orders} facturas</div></div>
-                    <div style={{fontSize:10.5,color:"#f0a500"}}>{fU(c.revenue)}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div>
-              <div className="slbl">Últimas Facturas</div>
-              <div style={{background:"#0d0d1c",border:"1px solid #181826"}}>
-                {orders.slice(0,5).map((o,i)=>(
-                  <div key={o.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 14px",borderBottom:i<4?"1px solid #090914":"none",cursor:"pointer"}} onClick={()=>setSelO(o)}>
-                    <div><div style={{fontSize:10.5}}>{o.client}</div><div style={{fontSize:7.5,color:"#3a3a4a"}}>{o.confirmedAt} · {o.sellerName.split(" ")[0]}</div></div>
-                    <div style={{textAlign:"right"}}><div style={{fontSize:10.5,color:"#f0a500"}}>{fU(o.summary.totalRevenueUSD)}</div><div style={{fontSize:7.5,color:"#3a3a4a"}}>{o.items.length} SKUs</div></div>
-                  </div>
-                ))}
-                <div style={{padding:"9px 14px",borderTop:"1px solid #090914"}}>
-                  <button className="ghost" style={{width:"100%",fontSize:7.5}} onClick={()=>setTab("hist")}>Ver todas →</button>
-                </div>
+              <div className="lbl" style={{marginBottom:10}}>Actualizar</div>
+              <button className="btn" onClick={()=>setTab("ventas")} style={{marginBottom:10}}>Abrir panel de ventas</button>
+              <div style={{fontSize:8.5,color:"#555",lineHeight:1.55}}>
+                Cada lunes sube el reporte completo de Notion en <b>Ventas → Actualizar reporte</b>.
               </div>
             </div>
           </div>
+          {/* Notion flow: details live in Ventas tab */}
         </div>}
 
         {/* CARGAR COSTOS */}

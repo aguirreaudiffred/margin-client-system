@@ -46,6 +46,21 @@ export function normProductCategory(raw) {
   return "OTRO";
 }
 
+export function marginPctForCategory(category) {
+  switch (category) {
+    case "VELAS":
+      return 0.23;
+    case "DETERGENTE":
+      return 0.06;
+    case "BEBIDAS":
+      return 0.10;
+    case "MIXTO":
+      return 0.15;
+    default:
+      return 0;
+  }
+}
+
 export function parseAmount(v) {
   if (v == null || v === "") return 0;
   if (typeof v === "number" && !Number.isNaN(v)) return v;
@@ -105,6 +120,8 @@ export function parseNotionSalesRows(rows, meta = {}) {
     const sellerName = normSellerName(pick(row, ["Sales Representative", "Representante", "Vendedor"]));
     const productRaw = pick(row, ["Product", "Producto", "product"]);
     const productCategory = normProductCategory(productRaw);
+    const marginPct = marginPctForCategory(productCategory);
+    const profitUSD = amount * marginPct;
     const poDate = parseExcelDate(pick(row, ["PO Date", "Fecha PO", "po date"]));
     const deliveryDate = parseExcelDate(pick(row, ["Delivery Date", "Fecha entrega"]));
     const zone = String(pick(row, ["Delivery Location", "Zona", "Ubicacion"]) || "").trim() || "Texas";
@@ -117,6 +134,8 @@ export function parseNotionSalesRows(rows, meta = {}) {
       productCategory,
       productRaw: String(productRaw).trim(),
       amountUSD: amount,
+      marginPct,
+      profitUSD,
       poDate,
       deliveryDate,
       status: String(pick(row, ["Status", "Estatus"]) || "").trim(),
