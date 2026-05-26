@@ -5,8 +5,10 @@ import sellersSeed from "./data/sellers.json";
 import{enrichOrderResult,MAX_CIRCULATION_LBS,fmtKg,fmtLbs}from"./lib/orderCalc.js";
 import{fmtDualWeight,normalizeProductWeight}from"./lib/weightUnits.js";
 import{readCatalogFile,mergeCatalogImport,parseWeightsCsv}from"./lib/catalogImport.js";
+import salesSeedBundle from"./data/sales-seed.json";
+import SalesPanel from"./components/SalesPanel.jsx";
 
-const LS={orders:"mcs_orders",products:"mcs_products",sellers:"mcs_sellers"};
+const LS={orders:"mcs_orders",products:"mcs_products",sellers:"mcs_sellers",sales:"mcs_sales",salesMeta:"mcs_sales_meta"};
 const loadLS=(key,fallback)=>{try{const r=localStorage.getItem(key);if(r)return JSON.parse(r);}catch(e){}return fallback;};
 const normProds=(arr)=>(arr||[]).map(normalizeProductWeight);
 
@@ -63,6 +65,8 @@ export default function App(){
   const[importMsg,setImportMsg]=useState(null);
   const[sellers,setSellers]=useState(()=>loadLS(LS.sellers,sellersSeed));
   const[orders,setOrders]=useState(()=>loadLS(LS.orders,ordersSeed));
+  const[sales,setSales]=useState(()=>loadLS(LS.sales,salesSeedBundle?.lines||[]));
+  const[salesMeta,setSalesMeta]=useState(()=>loadLS(LS.salesMeta,salesSeedBundle?.meta||null));
   const[R,setR]=useState(null);
   const[xr,setXr]=useState(17.15);
   const[xrLoad,setXrLoad]=useState(false);
@@ -125,6 +129,8 @@ export default function App(){
   useEffect(()=>{try{localStorage.setItem(LS.products,JSON.stringify(prods));}catch(e){}},[prods]);
   useEffect(()=>{try{localStorage.setItem(LS.sellers,JSON.stringify(sellers));}catch(e){}},[sellers]);
   useEffect(()=>{try{localStorage.setItem(LS.orders,JSON.stringify(orders));}catch(e){}},[orders]);
+  useEffect(()=>{try{localStorage.setItem(LS.sales,JSON.stringify(sales));}catch(e){}},[sales]);
+  useEffect(()=>{try{localStorage.setItem(LS.salesMeta,JSON.stringify(salesMeta));}catch(e){}},[salesMeta]);
 
   useEffect(()=>{
     if(cData.sellerId){const s=sellers.find(x=>x.id===cData.sellerId);if(s)setCData(d=>({...d,zone:s.zone}));}
@@ -269,7 +275,7 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
     return true;
   });
 
-  const TABS=[["dash","Dashboard"],["costos","Cargar Costos"],["pedido","Nuevo Pedido"],["hist","Facturas"],["rep","Reportes"],["cat","Catálogo"],["vend","Equipo"]];
+  const TABS=[["dash","Dashboard"],["ventas","Ventas"],["costos","Cargar Costos"],["pedido","Nuevo Pedido"],["hist","Facturas"],["rep","Reportes"],["cat","Catálogo"],["vend","Equipo"]];
 
   if(!R)return(<div className="app-loading"><span className="spin">↻</span>Cargando…</div>);
   const{BarChart,Bar,LineChart,Line,XAxis,YAxis,Tooltip,ResponsiveContainer,Cell,PieChart,Pie,Legend}=R;
@@ -305,6 +311,8 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
 
       <div style={{padding:"22px 20px",maxWidth:1300,margin:"0 auto"}}>
 
+        {tab==="ventas"&&<SalesPanel sales={sales} setSales={setSales} salesMeta={salesMeta} setSalesMeta={setSalesMeta} sellers={sellers} R={R}/>}
+
         {/* DASHBOARD */}
         {tab==="dash"&&<div className="fade">
           <div className="slbl">Margin & Client System · Ene–May 2026</div>
@@ -313,7 +321,7 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
             <div>Carga el PDF de compras Alpha para ver márgenes reales. <button className="ghost" style={{padding:"2px 9px",fontSize:7.5,marginLeft:8}} onClick={()=>setTab("costos")}>Cargar →</button></div>
           </div>}
           <div className="g4" style={{marginBottom:18}}>
-            {[["FACTURACIÓN",fU(totalRev),"#d8d4c8","hist"],["CLIENTES",`${new Set(orders.map(o=>o.client)).size}`,"#6c8dfa","hist"],["FACTURAS",orders.length,"#f0a500","hist"],["CATÁLOGO",`${prods.length} SKUs`,"#00c896","cat"]].map(([l,v,c,t])=>(
+            {[["FACTURACIÓN",fU(totalRev),"#d8d4c8","hist"],["VENTAS NOTION",fU(sales.reduce((a,s)=>a+(s.amountUSD||0),0)),"#6c8dfa","ventas"],["CLIENTES",`${new Set([...orders.map(o=>o.client),...sales.map(s=>s.client)]).size}`,"#c084fc","ventas"],["CATÁLOGO",`${prods.length} SKUs`,"#00c896","cat"]].map(([l,v,c,t])=>(
               <div key={l} className="card" style={{cursor:"pointer"}} onClick={()=>setTab(t)}>
                 <div className="lbl">{l}</div>
                 <div style={{fontSize:22,color:c,fontWeight:300,marginTop:5}}>{v}</div>
