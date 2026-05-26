@@ -14,6 +14,7 @@ const PERIODS = [
 
 const VIEWS = [
   ["resumen", "Resumen"],
+  ["pos", "POs"],
   ["cliente", "Por cliente"],
   ["vendedor", "Por vendedor"],
   ["zona", "Por zona"],
@@ -36,6 +37,8 @@ export default function SalesPanel({ sales, setSales, salesMeta, setSalesMeta, s
     [sales, period, fSeller, fCat],
   );
   const sum = useMemo(() => summarizeSales(filtered), [filtered]);
+  const totalProfit = useMemo(() => filtered.reduce((a, s) => a + (s.profitUSD || 0), 0), [filtered]);
+  const profitPct = sum.total > 0 ? totalProfit / sum.total : 0;
 
   const handleImport = async (file) => {
     setImporting(true);
@@ -152,7 +155,7 @@ export default function SalesPanel({ sales, setSales, salesMeta, setSalesMeta, s
       {view === "resumen" && (
         <>
           <div className="g4" style={{ marginBottom: 16 }}>
-            {[["HOY", fU(sum.today), "#f0a500"], ["ESTA SEMANA", fU(sum.week), "#00c896"], ["FILTRO ACTIVO", fU(sum.total), "#d8d4c8"], ["PEDIDOS", sum.orderCount, "#6c8dfa"]].map(([l, v, c]) => (
+            {[["HOY", fU(sum.today), "#f0a500"], ["ESTA SEMANA", fU(sum.week), "#00c896"], ["VENTA", fU(sum.total), "#d8d4c8"], ["GANANCIA EST.", `${fU(totalProfit)} · ${(profitPct * 100).toFixed(1)}%`, "#6c8dfa"]].map(([l, v, c]) => (
               <div key={l} className="card">
                 <div className="lbl">{l}</div>
                 <div style={{ fontSize: 20, color: c, marginTop: 6 }}>{v}</div>
@@ -214,6 +217,42 @@ export default function SalesPanel({ sales, setSales, salesMeta, setSalesMeta, s
             </div>
           </div>
         </>
+      )}
+
+      {view === "pos" && (
+        <div className="ovfl" style={{ background: "#0d0d1c", border: "1px solid #181826" }}>
+          <table className="tbl">
+            <thead>
+              <tr>
+                <th>PO</th>
+                <th>Fecha</th>
+                <th>Cliente</th>
+                <th>Vendedor</th>
+                <th>Tipo</th>
+                <th>Venta USD</th>
+                <th>%</th>
+                <th>Ganancia est.</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered
+                .slice()
+                .sort((a, b) => String(b.poDate || "").localeCompare(String(a.poDate || "")))
+                .map((s) => (
+                  <tr key={s.id}>
+                    <td style={{ color: "#f0a500", fontSize: 9 }}>{s.po || "—"}</td>
+                    <td style={{ color: "#444", fontSize: 9 }}>{s.poDate || "—"}</td>
+                    <td style={{ fontSize: 10 }}>{s.client}</td>
+                    <td style={{ fontSize: 10 }}>{s.sellerName || "Sin asignar"}</td>
+                    <td style={{ color: "#6c8dfa", fontSize: 9 }}>{s.productCategory || "—"}</td>
+                    <td style={{ color: "#f0a500" }}>{fU(s.amountUSD)}</td>
+                    <td style={{ color: "#555" }}>{((s.marginPct || 0) * 100).toFixed(0)}%</td>
+                    <td style={{ color: "#00c896" }}>{fU(s.profitUSD || 0)}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
       )}
 
       {["cliente", "vendedor", "zona", "producto"].includes(view) && (
