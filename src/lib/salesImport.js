@@ -17,21 +17,63 @@ export function normKey(s) {
 }
 
 export function normClient(name) {
-  const n = String(name || "").trim().replace(/\s+/g, " ");
+  const n = String(name || "")
+    .trim()
+    .replace(/\r?\n/g, " ")
+    .replace(/\s*\([^)]*\)\s*/g, " ")
+    .replace(/\s+/g, " ");
   if (!n) return "Sin cliente";
   const k = normKey(n);
   if (k.includes("mexmore") || k.includes("mex-more")) return "MEX-MORE";
   if (k.includes("bodega guzman")) return "BODEGA GUZMAN";
   if (k.includes("tortilleria")) return "LA TORTILLERIA";
-  if (k.includes("frontera")) return "FRONTERA IMPORTS";
   if (k.includes("2 fronteras")) return "2 FRONTERAS LLC";
+  if (k.includes("frontera")) return "FRONTERA IMPORTS";
+  if (k.includes("comercial mexicana")) return "COMERCIAL MEXICANA";
+  if (k.includes("rj hispanic")) return "RJ HISPANIC";
+  if (k.includes("rio grande")) return "RIO GRANDE";
+  if (k.includes("border cash")) return "BORDER CASH & CARRY";
+  if (k.includes("la silla")) return "LA SILLA";
+  if (k.includes("pamex")) return "PAMEX";
+  if (k.includes("el guero")) return "EL GUERO";
+  if (k.includes("importmex")) return "IMPORTMEX";
+  if (k.includes("blu brands")) return "BLU BRANDS";
+  if (k.includes("new age")) return "NEW AGE";
   return n.toUpperCase();
 }
 
 export function normSellerName(raw) {
   const k = normKey(raw);
   if (!k) return "";
-  return SELLER_ALIASES[k] || String(raw).trim();
+  if (SELLER_ALIASES[k]) return SELLER_ALIASES[k];
+  if (k.includes("luis") && k.includes("perez")) return "Luis Miguel Perez";
+  if (k.includes("manuel") && k.includes("fernandez")) return "Manuel Fernandez";
+  return String(raw).trim().replace(/\r?\n/g, " ");
+}
+
+/** Si el Excel trae representante vacío, usa el vendedor más frecuente del mismo cliente en el lote. */
+export function assignMissingSellers(lines) {
+  const byClient = {};
+  for (const line of lines) {
+    const ck = normClient(line.client);
+    if (!byClient[ck]) byClient[ck] = [];
+    byClient[ck].push(line);
+  }
+  for (const group of Object.values(byClient)) {
+    const counts = {};
+    for (const l of group) {
+      if (l.sellerName) counts[l.sellerName] = (counts[l.sellerName] || 0) + 1;
+    }
+    const best = Object.entries(counts).sort((a, b) => b[1] - a[1])[0]?.[0];
+    if (!best) continue;
+    for (const l of group) {
+      if (!l.sellerName) {
+        l.sellerName = best;
+        l.sellerInferred = true;
+      }
+    }
+  }
+  return lines;
 }
 
 export function normProductCategory(raw) {
@@ -116,7 +158,16 @@ export function parseNotionSalesRows(rows, meta = {}) {
     if (!client && !amount && !po) return;
     if (!amount && !po) return;
 
-    const sellerName = normSellerName(pick(row, ["Sales Representative", "Representante", "Vendedor"]));
+    const sellerName = normSellerName(
+      pick(row, [
+        "Sales Representative",
+        "Sales Rep",
+        "Representante de ventas",
+        "Representante",
+        "Vendedor",
+        "Representative",
+      ]),
+    );
     const productRaw = pick(row, ["Product", "Producto", "product"]);
     const productCategory = normProductCategory(productRaw);
     const marginPct = marginPctForCategory(productCategory);
@@ -145,6 +196,8 @@ export function parseNotionSalesRows(rows, meta = {}) {
       importedAt: meta.importedAt || new Date().toISOString(),
     });
   });
+
+  assignMissingSellers(lines);
 
   if (!lines.length) errors.push("No se encontraron ventas en el archivo");
   return { lines, errors };

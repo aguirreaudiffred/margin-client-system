@@ -1,17 +1,17 @@
 {
   "meta": {
     "reportLabel": "Semana 18-22 Mayo 2026",
-    "batchId": "notion_mayo_18_22",
-    "sourceFile": "Notion Reporte Semana 18-22 Mayo.xlsx",
-    "importedAt": "2026-05-26T16:15:05.029Z",
+    "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+    "sourceFile": "Notion Reporte Semana 18-22 Mayo copy.xlsx",
+    "importedAt": "2026-05-27T00:25:42.315Z",
     "rowCount": 72
   },
   "lines": [
     {
-      "id": "sl_notion_mayo_18_22_0_PO_3986",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-3986",
       "client": "MEX-MORE",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "VELAS",
       "productRaw": "Veladoras",
       "amountUSD": 44251.2,
@@ -23,14 +23,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_1_PO_107069",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-107069",
       "client": "LA TORTILLERIA",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 32946.94,
@@ -42,14 +42,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_2_PO_287",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-287",
       "client": "COMERCIAL MEXICANA",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 26787.4,
@@ -61,14 +61,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_3_PO_285",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-285",
       "client": "COMERCIAL MEXICANA",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 25702.6,
@@ -80,14 +80,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_4_PO_3983",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-3983",
       "client": "MEX-MORE",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 19008,
@@ -99,14 +99,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_5_PO_3982",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-3982",
       "client": "MEX-MORE",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 19008,
@@ -118,14 +118,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_6_PO_3981",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-3981",
       "client": "MEX-MORE",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 19008,
@@ -137,14 +137,14 @@
       "zone": "Texas",
       "comments": "SABD0065",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_7_PO_784",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-784",
       "client": "EL GUERO",
-      "sellerName": "",
+      "sellerName": "Manuel Fernandez",
       "productCategory": "DETERGENTE",
       "productRaw": "DETERGENTES",
       "amountUSD": 20696,
@@ -156,14 +156,14 @@
       "zone": "Texas",
       "comments": "Revisar precio/envio",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_8_PO_783",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-783",
       "client": "EL GUERO",
-      "sellerName": "",
+      "sellerName": "Manuel Fernandez",
       "productCategory": "DETERGENTE",
       "productRaw": "DETERGENTES",
       "amountUSD": 20696,
@@ -175,14 +175,14 @@
       "zone": "Texas",
       "comments": "Revisar precio/envio",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_9_PO_0050",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-0050",
       "client": "RJ HISPANIC",
-      "sellerName": "",
+      "sellerName": "Manuel Fernandez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 22222.3,
@@ -194,14 +194,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_10_PO_0049",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-0049",
       "client": "RJ HISPANIC",
-      "sellerName": "",
+      "sellerName": "Manuel Fernandez",
       "productCategory": "BEBIDAS",
       "productRaw": "Bebida",
       "amountUSD": 10163.5,
@@ -213,14 +213,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_11_PO_0048",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-0048",
       "client": "RJ HISPANIC",
-      "sellerName": "",
+      "sellerName": "Manuel Fernandez",
       "productCategory": "VELAS",
       "productRaw": "Veladoras",
       "amountUSD": 25647.6,
@@ -232,14 +232,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_12_PO1000244",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO1000244",
       "client": "COMERCIAL MEXICANA",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 18522,
@@ -251,14 +251,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_13_PO1000243",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO1000243",
       "client": "COMERCIAL MEXICANA",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 18522,
@@ -270,14 +270,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_14_PO1000242",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO1000242",
       "client": "COMERCIAL MEXICANA",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 18522,
@@ -289,14 +289,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_15_PO1000241",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO1000241",
       "client": "COMERCIAL MEXICANA",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 18522,
@@ -308,14 +308,14 @@
       "zone": "Texas",
       "comments": "SABD0059",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_16_PO_2122",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-2122",
       "client": "RJ HISPANIC",
-      "sellerName": "",
+      "sellerName": "Manuel Fernandez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 19800,
@@ -327,14 +327,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_17_PO_2121",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-2121",
       "client": "RJ HISPANIC",
-      "sellerName": "",
+      "sellerName": "Manuel Fernandez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 19800,
@@ -346,14 +346,14 @@
       "zone": "Texas",
       "comments": "SABD0058",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_18_PO_106514",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-106514",
       "client": "LA TORTILLERIA",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 18360,
@@ -365,14 +365,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_19_PO_106513",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-106513",
       "client": "LA TORTILLERIA",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 18360,
@@ -384,14 +384,14 @@
       "zone": "Texas",
       "comments": "SABD0060",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_20_PO_106512",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-106512",
       "client": "LA TORTILLERIA",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 18360,
@@ -403,14 +403,14 @@
       "zone": "Texas",
       "comments": "SABD0061",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_21_PO_106510",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-106510",
       "client": "LA TORTILLERIA",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 18360,
@@ -422,14 +422,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_22_PO_42305",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-42305",
       "client": "FRONTERA IMPORTS",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "VELAS",
       "productRaw": "Veladoras",
       "amountUSD": 16222.01,
@@ -441,14 +441,14 @@
       "zone": "Texas",
       "comments": "#14",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_23_PO_106387",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-106387",
       "client": "LA TORTILLERIA",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 31830.45,
@@ -460,14 +460,14 @@
       "zone": "Texas",
       "comments": "SABD0064",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_24_PO_33041",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-33041",
       "client": "RIO GRANDE",
-      "sellerName": "",
+      "sellerName": "Manuel Fernandez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 18900,
@@ -479,14 +479,14 @@
       "zone": "Texas",
       "comments": "SABD0062",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_25_PO_88549",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-88549",
       "client": "BODEGA GUZMAN",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 16740.6,
@@ -498,14 +498,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_26_PO_42280",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-42280",
       "client": "FRONTERA IMPORTS",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 9261,
@@ -517,14 +517,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_27_PO_4306",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-4306",
       "client": "BORDER CASH & CARRY",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 26587.5,
@@ -536,14 +536,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_28_PO_4305",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-4305",
       "client": "BORDER CASH & CARRY",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 26587.5,
@@ -555,14 +555,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_29_PO_4304",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-4304",
       "client": "BORDER CASH & CARRY",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 27273.75,
@@ -574,14 +574,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_30_PO_4303",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-4303",
       "client": "BORDER CASH & CARRY",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 26587.5,
@@ -593,14 +593,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_31_PO_04142026",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-04142026",
       "client": "NEW AGE",
-      "sellerName": "",
+      "sellerName": "Manuel Fernandez",
       "productCategory": "VELAS",
       "productRaw": "Veladoras",
       "amountUSD": 37532.1,
@@ -612,14 +612,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_32_PO_05142026",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-05142026",
       "client": "NEW AGE",
-      "sellerName": "",
+      "sellerName": "Manuel Fernandez",
       "productCategory": "BEBIDAS",
       "productRaw": "Bebida",
       "amountUSD": 24550.25,
@@ -631,14 +631,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_33_PO_46714",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-46714",
       "client": "IMPORTMEX",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 35977.44,
@@ -650,14 +650,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_34_PO_3940",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-3940",
       "client": "MEX-MORE",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 19008,
@@ -669,14 +669,14 @@
       "zone": "Texas",
       "comments": "SABD0063",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_35_PO_3939",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-3939",
       "client": "MEX-MORE",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 19008,
@@ -688,14 +688,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_36_PO_3941",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-3941",
       "client": "MEX-MORE",
-      "sellerName": "",
+      "sellerName": "Luis Miguel Perez",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
       "amountUSD": 19008,
@@ -707,14 +707,14 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_37_PO_0027",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-0027",
       "client": "BLU BRANDS",
-      "sellerName": "",
+      "sellerName": "Manuel Fernandez",
       "productCategory": "MIXTO",
       "productRaw": "Mixto",
       "amountUSD": 15241.65,
@@ -726,11 +726,11 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_38_PO_3929",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO 3929",
       "client": "MEX-MORE",
       "sellerName": "Luis Miguel Perez",
@@ -745,11 +745,11 @@
       "zone": "Texas",
       "comments": "P11",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_39_PO_2007",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-2007",
       "client": "LA SILLA",
       "sellerName": "Manuel Fernandez",
@@ -764,11 +764,11 @@
       "zone": "Texas",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_40_PO_2006",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-2006",
       "client": "LA SILLA",
       "sellerName": "Manuel Fernandez",
@@ -783,11 +783,11 @@
       "zone": "Texas",
       "comments": "IN 1046",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_41_PO_3924",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-3924",
       "client": "MEX-MORE",
       "sellerName": "Luis Miguel Perez",
@@ -802,11 +802,11 @@
       "zone": "Texas",
       "comments": "CAPTURADO",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_42_PO_2004",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-2004",
       "client": "LA SILLA",
       "sellerName": "Manuel Fernandez",
@@ -821,11 +821,11 @@
       "zone": "Texas",
       "comments": "IN 1049",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_43_PO5749",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO5749",
       "client": "COMERCIAL MEXICANA",
       "sellerName": "Luis Miguel Perez",
@@ -840,11 +840,11 @@
       "zone": "999 South Oyster Bay Road Suite 303, Bethpage, NY 11714",
       "comments": "CAPTURADO",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_44_PO_105109",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-105109",
       "client": "LA TORTILLERIA",
       "sellerName": "Luis Miguel Perez",
@@ -859,11 +859,11 @@
       "zone": "1001 Reynolds Blvd Winston Salem NC 27105\r\nUnited States",
       "comments": "CAPTURADO",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_45_PO_312",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-312",
       "client": "PAMEX",
       "sellerName": "Luis Miguel Perez",
@@ -878,11 +878,11 @@
       "zone": "7900 Parston Drive\r\nMD 20747404",
       "comments": "CAPTURADO",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_46_PO_3898",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-3898",
       "client": "MEX-MORE",
       "sellerName": "Luis Miguel Perez",
@@ -897,11 +897,11 @@
       "zone": "1320 PROGRESS INDUSTRIAL BLVD, STE 500\r\nLAWRENCEVILLE, GA 30043",
       "comments": "CAPTURADO",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_47_PO_3891",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-3891",
       "client": "MEX-MORE",
       "sellerName": "Luis Miguel Perez",
@@ -916,13 +916,13 @@
       "zone": "1320 PROGRESS INDUSTRIAL BLVD, STE 500\r\nLAWRENCEVILLE, GA 30043",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_48_PO_3229",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-3229",
-      "client": "LA ESTRELLITA (VELAS)",
+      "client": "LA ESTRELLITA ",
       "sellerName": "Manuel Fernandez",
       "productCategory": "VELAS",
       "productRaw": "Veladoras",
@@ -935,11 +935,11 @@
       "zone": "3201 Military pkwy st suite A\r\nMesquite Tx 75149",
       "comments": "Entregado en su bodega",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_49_PO_12884",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-12884",
       "client": "LA BODEGA ARKANSAS",
       "sellerName": "Manuel Fernandez",
@@ -954,11 +954,11 @@
       "zone": "585 Jean Mary Ave\r\nSpringdale AR 72762",
       "comments": "CAPTURADO",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_50_PO_3883",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-3883",
       "client": "MEX-MORE",
       "sellerName": "Luis Miguel Perez",
@@ -973,11 +973,11 @@
       "zone": "1320 PROGRESS INDUSTRIAL BLVD, STE 500\r\nLAWRENCEVILLE, GA 30043",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_51_PO_104494",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-104494",
       "client": "LA TORTILLERIA",
       "sellerName": "Luis Miguel Perez",
@@ -992,13 +992,13 @@
       "zone": "1001 Reynolds Blvd Winston Salem NC 27105\r\nUnited States",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_52_PO_2234",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-2234",
-      "client": "RJ HISPANIC DISTRIBUITOR",
+      "client": "RJ HISPANIC",
       "sellerName": "Manuel Fernandez",
       "productCategory": "MIXTO",
       "productRaw": "Mixto",
@@ -1011,13 +1011,13 @@
       "zone": "425 KOLOA AVE, EDMOND OK 73034",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_53_PO_01230",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-01230",
-      "client": "ZAYA BRANDZ (VELAS)",
+      "client": "ZAYA BRANDZ ",
       "sellerName": "Manuel Fernandez",
       "productCategory": "MIXTO",
       "productRaw": "Mixto",
@@ -1030,11 +1030,11 @@
       "zone": "3340 Greens Rd B600 Houston, Tx 77032",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_54_PO_104373",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-104373",
       "client": "LA TORTILLERIA",
       "sellerName": "Luis Miguel Perez",
@@ -1049,11 +1049,11 @@
       "zone": "1001 Reynolds Blvd Winston Salem NC 27105\r\nUnited States",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_55_PO_2003",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-2003",
       "client": "BODEGA GUZMAN",
       "sellerName": "Luis Miguel Perez",
@@ -1068,11 +1068,11 @@
       "zone": "4202 Oakwood Blvd.\r\nMelvindale, MI 48122, EE. UU.",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_56_PO_2002",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-2002",
       "client": "BODEGA GUZMAN",
       "sellerName": "Luis Miguel Perez",
@@ -1087,11 +1087,11 @@
       "zone": "4202 Oakwood Blvd.\r\nMelvindale, MI 48122, EE. UU.",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_57_PO_2001",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-2001",
       "client": "BODEGA GUZMAN",
       "sellerName": "Luis Miguel Perez",
@@ -1106,11 +1106,11 @@
       "zone": "4202 Oakwood Blvd.\r\nMelvindale, MI 48122, EE. UU.",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_58_PO_3869",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-3869",
       "client": "MEX-MORE",
       "sellerName": "Luis Miguel Perez",
@@ -1125,11 +1125,11 @@
       "zone": "1320 PROGRESS INDUSTRIAL BLVD, STE 500\r\nLAWRENCEVILLE, GA 30043",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_59_PO_32069",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-32069",
       "client": "RIO GRANDE",
       "sellerName": "Manuel Fernandez",
@@ -1144,11 +1144,11 @@
       "zone": "11411 Hillguard rd,\r\nDallas, TX 75243",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_60_PO_32068",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-32068",
       "client": "RIO GRANDE",
       "sellerName": "Manuel Fernandez",
@@ -1163,11 +1163,11 @@
       "zone": "11411 Hillguard rd,\r\nDallas, TX 75243",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_61_PO_3866",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-3866",
       "client": "MEX-MORE",
       "sellerName": "Luis Miguel Perez",
@@ -1182,11 +1182,11 @@
       "zone": "1320 PROGRESS INDUSTRIAL BLVD, STE 500\r\nLAWRENCEVILLE, GA 30043",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_62_PO_3865",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-3865",
       "client": "MEX-MORE",
       "sellerName": "Luis Miguel Perez",
@@ -1201,11 +1201,11 @@
       "zone": "1320 PROGRESS INDUSTRIAL BLVD, STE 500\r\nLAWRENCEVILLE, GA 30043",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_63_PO_41610",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-41610",
       "client": "FRONTERA IMPORTS",
       "sellerName": "Luis Miguel Perez",
@@ -1220,11 +1220,11 @@
       "zone": "143 LAKE MIRROR RD\r\nFOREST PARK, GA 30297",
       "comments": "Veladoras #14",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_64_PO_810_6852",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-810-6852",
       "client": "BT WHOLESALE CO.",
       "sellerName": "Manuel Fernandez",
@@ -1239,11 +1239,11 @@
       "zone": "4404 W. ANN LURIE PLACE\r\nCHICAGO IL 60632",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_65_PO_810_6853",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-810-6853",
       "client": "BT WHOLESALE CO.",
       "sellerName": "Manuel Fernandez",
@@ -1258,11 +1258,11 @@
       "zone": "4404 W. ANN LURIE PLACE\r\nCHICAGO IL 60632",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_66_PO_3834",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-3834",
       "client": "MEX-MORE",
       "sellerName": "Luis Miguel Perez",
@@ -1277,11 +1277,11 @@
       "zone": "1320 PROGRESS INDUSTRIAL BLVD, STE 500\r\nLAWRENCEVILLE, GA 30043",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_67_PO_05500",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-05500",
       "client": "COMERCIAL MEXICANA",
       "sellerName": "Luis Miguel Perez",
@@ -1296,11 +1296,11 @@
       "zone": "999 South Oyster Bay Road Suite 303, Bethpage, NY 11714",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_68_PO_05499",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-05499",
       "client": "COMERCIAL MEXICANA",
       "sellerName": "Luis Miguel Perez",
@@ -1315,13 +1315,13 @@
       "zone": "999 South Oyster Bay Road Suite 303, Bethpage, NY 11714",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_69_PO_001",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-001",
-      "client": "FRONTERA IMPORTS",
+      "client": "2 FRONTERAS LLC",
       "sellerName": "Alejandro Aguirre",
       "productCategory": "DETERGENTE",
       "productRaw": "Detergente",
@@ -1334,11 +1334,11 @@
       "zone": "1244 RobinHood Dr Suite 102 & 103\r\nBrownsville, TX 78521 , United States",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_70_PO_5442",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-5442",
       "client": "COMERCIAL MEXICANA",
       "sellerName": "Luis Miguel Perez",
@@ -1353,11 +1353,11 @@
       "zone": "999 South Oyster Bay Road Suite 303, Bethpage, NY 11714",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     },
     {
-      "id": "sl_notion_mayo_18_22_71_PO_5443",
+      "id": "sl_notion_notion_reporte_semana_18_22_mayo_copy_",
       "po": "PO-5443",
       "client": "COMERCIAL MEXICANA",
       "sellerName": "Luis Miguel Perez",
@@ -1372,8 +1372,8 @@
       "zone": "999 South Oyster Bay Road Suite 303, Bethpage, NY 11714",
       "comments": "",
       "reportLabel": "Semana 18-22 Mayo 2026",
-      "batchId": "notion_mayo_18_22",
-      "importedAt": "2026-05-26T16:15:04.968Z"
+      "batchId": "notion_notion_reporte_semana_18_22_mayo_copy_xl",
+      "importedAt": "2026-05-27T00:25:42.085Z"
     }
   ]
 }
