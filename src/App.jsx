@@ -121,9 +121,9 @@ export default function App(){
         const cur=loadLS(LS.sellers,sellersSeed);
         return !Array.isArray(cur)||cur.length!==2||cur.some(s=>!allowed.has(s.name));
       };
-      const mustReset=localStorage.getItem("mcs_version")!=="5"||sellersBad();
+      const mustReset=localStorage.getItem("mcs_version")!=="6"||sellersBad();
       if(mustReset){
-        localStorage.setItem("mcs_version","5");
+        localStorage.setItem("mcs_version","6");
         localStorage.setItem(LS.sellers,JSON.stringify(sellersSeed));
         localStorage.setItem(LS.orders,JSON.stringify([]));
         localStorage.setItem(LS.sales,JSON.stringify(salesSeedBundle?.lines||[]));
@@ -303,7 +303,7 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
             <div style={{fontFamily:"'Syne',sans-serif",fontSize:13,fontWeight:900,lineHeight:1.2}}>
               <span style={{color:"#d8d4c8"}}>Margin & Client </span><span style={{color:"#f0a500"}}>System</span>
             </div>
-            <div style={{fontSize:7,letterSpacing:3,color:"#181826",marginTop:1}}>FORMEXA USA LLC · Notion v5</div>
+            <div style={{fontSize:7,letterSpacing:3,color:"#181826",marginTop:1}}>FORMEXA USA LLC · Notion v6</div>
           </div>
           <nav style={{display:"flex",alignItems:"stretch",flexWrap:"nowrap",overflowX:"auto",WebkitOverflowScrolling:"touch",maxWidth:"100%"}}>
             {TABS.map(([k,v])=><button key={k} className={`tab ${tab===k?"on":""}`} onClick={()=>setTab(k)}>{v}</button>)}
