@@ -7,6 +7,7 @@ import{fmtDualWeight,normalizeProductWeight}from"./lib/weightUnits.js";
 import{readCatalogFile,mergeCatalogImport,parseWeightsCsv}from"./lib/catalogImport.js";
 import salesSeedBundle from"./data/sales-seed.json";
 import SalesPanel from"./components/SalesPanel.jsx";
+import ReportesPanel from"./components/ReportesPanel.jsx";
 
 const LS={orders:"mcs_orders",products:"mcs_products",sellers:"mcs_sellers",sales:"mcs_sales",salesMeta:"mcs_sales_meta"};
 const loadLS=(key,fallback)=>{try{const r=localStorage.getItem(key);if(r)return JSON.parse(r);}catch(e){}return fallback;};
@@ -121,9 +122,9 @@ export default function App(){
         const cur=loadLS(LS.sellers,sellersSeed);
         return !Array.isArray(cur)||cur.length!==2||cur.some(s=>!allowed.has(s.name));
       };
-      const mustReset=localStorage.getItem("mcs_version")!=="6"||sellersBad();
+      const mustReset=localStorage.getItem("mcs_version")!=="7"||sellersBad();
       if(mustReset){
-        localStorage.setItem("mcs_version","6");
+        localStorage.setItem("mcs_version","7");
         localStorage.setItem(LS.sellers,JSON.stringify(sellersSeed));
         localStorage.setItem(LS.orders,JSON.stringify([]));
         localStorage.setItem(LS.sales,JSON.stringify(salesSeedBundle?.lines||[]));
@@ -288,33 +289,33 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
     return true;
   });
 
-  const TABS=[["dash","Dashboard"],["ventas","Ventas"],["cat","Catálogo"]];
+  const TABS=[["dash","Dashboard"],["ventas","Ventas"],["reportes","Reportes"],["cat","Catálogo"]];
 
   if(!R)return(<div className="app-loading"><span className="spin">↻</span>Cargando…</div>);
   const{BarChart,Bar,LineChart,Line,XAxis,YAxis,Tooltip,ResponsiveContainer,Cell,PieChart,Pie,Legend}=R;
   const ChartShell=({h=140,children})=>(<ResponsiveContainer width="100%" height={h}>{children}</ResponsiveContainer>);
 
   return(
-    <div style={{fontFamily:"'IBM Plex Mono',monospace",background:"#06060e",minHeight:"100vh",color:"#d8d4c8"}}>
-      {/* HEADER */}
-      <div style={{borderBottom:"1px solid #0e0e1c",display:"flex",alignItems:"stretch",justifyContent:"space-between",paddingRight:16,flexWrap:"wrap"}}>
+    <div className="app-shell">
+      <div className="app-header">
         <div style={{display:"flex",alignItems:"stretch",flexWrap:"nowrap",minWidth:0,flex:1}}>
-          <div style={{padding:"11px 18px",flexShrink:0,borderRight:"1px solid #0e0e1c",display:"flex",flexDirection:"column",justifyContent:"center"}}>
-            <div style={{fontFamily:"'Syne',sans-serif",fontSize:13,fontWeight:900,lineHeight:1.2}}>
-              <span style={{color:"#d8d4c8"}}>Margin & Client </span><span style={{color:"#f0a500"}}>System</span>
+          <div className="app-brand">
+            <img src={`${import.meta.env.BASE_URL}formexa-logo.svg`} alt="Formexa" />
+            <div>
+              <div style={{fontSize:13,fontWeight:800,color:"var(--fx-text)",lineHeight:1.2}}>Margin & Client System</div>
+              <div className="app-brand-sub">Ventas Notion · v7</div>
             </div>
-            <div style={{fontSize:7,letterSpacing:3,color:"#181826",marginTop:1}}>FORMEXA USA LLC · Notion v6</div>
           </div>
           <nav style={{display:"flex",alignItems:"stretch",flexWrap:"nowrap",overflowX:"auto",WebkitOverflowScrolling:"touch",maxWidth:"100%"}}>
             {TABS.map(([k,v])=><button key={k} className={`tab ${tab===k?"on":""}`} onClick={()=>setTab(k)}>{v}</button>)}
           </nav>
         </div>
-        <div style={{display:"flex",alignItems:"center",gap:8}}>
-          {costsN===0&&<div style={{fontSize:7.5,color:"#f0a500",padding:"3px 9px",background:"rgba(240,165,0,.08)",border:"1px solid rgba(240,165,0,.2)"}}>⚠ Sin costos</div>}
+        <div style={{display:"flex",alignItems:"center",gap:8,padding:"8px 0"}}>
+          {costsN===0&&<div style={{fontSize:10,color:"var(--fx-red)",padding:"4px 10px",background:"var(--fx-red-light)",border:"1px solid #f5a8b5",borderRadius:4}}>⚠ Sin costos</div>}
           <div style={{textAlign:"right"}}>
-            <div style={{fontSize:7,color:"#252535",letterSpacing:2}}>USD/MXN</div>
-            <div style={{fontSize:15,color:"#f0a500",fontWeight:600,lineHeight:1.1}}>{xr.toFixed(4)}</div>
-            {xrDate&&<div style={{fontSize:7,color:"#181826"}}>{xrDate.toLocaleTimeString("es-MX")}</div>}
+            <div style={{fontSize:9,color:"var(--fx-muted)",letterSpacing:1}}>USD/MXN</div>
+            <div style={{fontSize:15,color:"var(--fx-green)",fontWeight:700,lineHeight:1.1}}>{xr.toFixed(4)}</div>
+            {xrDate&&<div style={{fontSize:9,color:"var(--fx-muted)"}}>{xrDate.toLocaleTimeString("es-MX")}</div>}
           </div>
           <button className="ghost" style={{padding:"5px 9px"}} onClick={async()=>{setXrLoad(true);try{const r=await fetch(XR_API);const d=await r.json();if(d.rates?.MXN){setXr(parseFloat(d.rates.MXN.toFixed(4)));setXrDate(new Date());}}catch(e){}finally{setXrLoad(false);}}} disabled={xrLoad}>
             {xrLoad?<span className="spin">↻</span>:"↻"}
@@ -326,11 +327,13 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
 
         {tab==="ventas"&&<SalesPanel sales={sales} setSales={setSales} salesMeta={salesMeta} setSalesMeta={setSalesMeta} sellers={sellers} R={R}/>}
 
+        {tab==="reportes"&&<ReportesPanel sales={sales} sellers={sellers}/>}
+
         {/* DASHBOARD */}
         {tab==="dash"&&<div className="fade">
-          <div className="slbl">Margin & Client System · Ventas Notion</div>
+          <div className="slbl">Dashboard · Ventas Notion</div>
           <div className="g4" style={{marginBottom:18}}>
-            {[["VENTAS NOTION",fU(salesTotal),"#6c8dfa","ventas"],["GANANCIA EST.",fU(salesProfit),"#00c896","ventas"],["MARGEN EST.",pct(salesProfitPct),"#f0a500","ventas"],["CATÁLOGO",`${prods.length} SKUs`,"#00c896","cat"]].map(([l,v,c,t])=>(
+            {[["VENTAS NOTION",fU(salesTotal),"var(--fx-green)","ventas"],["GANANCIA EST.",fU(salesProfit),"var(--fx-green-dark)","ventas"],["MARGEN EST.",pct(salesProfitPct),"var(--fx-red)","ventas"],["CATÁLOGO",`${prods.length} SKUs`,"var(--fx-green)","cat"]].map(([l,v,c,t])=>(
               <div key={l} className="card" style={{cursor:"pointer"}} onClick={()=>setTab(t)}>
                 <div className="lbl">{l}</div>
                 <div style={{fontSize:22,color:c,fontWeight:300,marginTop:5}}>{v}</div>
@@ -345,14 +348,14 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
               <div className="lbl" style={{marginBottom:10}}>Últimos POs (Notion)</div>
               <div style={{fontSize:9.5,color:"#555",lineHeight:1.6}}>
                 {sales.slice(0,6).map((s,i)=>(
-                  <div key={s.id||i} style={{display:"flex",justifyContent:"space-between",gap:10,padding:"6px 0",borderBottom:"1px solid #0e0e1c"}}>
+                  <div key={s.id||i} style={{display:"flex",justifyContent:"space-between",gap:10,padding:"6px 0",borderBottom:"1px solid var(--fx-border)"}}>
                     <div style={{minWidth:0}}>
-                      <div style={{fontSize:10,color:"#d8d4c8",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{s.client}</div>
-                      <div style={{fontSize:7.5,color:"#3a3a4a"}}>{s.poDate||"—"} · {s.productCategory||"—"} · {s.sellerName||"Sin asignar"}</div>
+                      <div style={{fontSize:10,color:"var(--fx-text)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{s.client}</div>
+                      <div style={{fontSize:7.5,color:"var(--fx-muted)"}}>{s.poDate||"—"} · {s.productCategory||"—"} · {s.sellerName||"Sin asignar"}</div>
                     </div>
                     <div style={{textAlign:"right"}}>
-                      <div style={{color:"#f0a500"}}>{fU(s.amountUSD)}</div>
-                      <div style={{color:"#00c896",fontSize:8.5}}>{fU(s.profitUSD||0)}</div>
+                      <div className="stat-green">{fU(s.amountUSD)}</div>
+                      <div style={{color:"var(--fx-green-dark)",fontSize:8.5}}>{fU(s.profitUSD||0)}</div>
                     </div>
                   </div>
                 ))}

@@ -41,6 +41,73 @@ function normSeller(n) {
   return String(n || "").trim() || "Sin asignar";
 }
 
+/** YYYY-MM from PO Date (Notion column). */
+export function poMonthKey(poDate) {
+  if (!poDate || typeof poDate !== "string") return null;
+  const m = poDate.match(/^(\d{4})-(\d{2})/);
+  return m ? `${m[1]}-${m[2]}` : null;
+}
+
+const MONTH_NAMES = [
+  "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+  "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre",
+];
+
+export function formatMonthLabel(yearMonth) {
+  if (!yearMonth || yearMonth === "all") return "Todos los meses";
+  const [y, mo] = yearMonth.split("-");
+  const idx = parseInt(mo, 10) - 1;
+  if (idx < 0 || idx > 11) return yearMonth;
+  return `${MONTH_NAMES[idx]} ${y}`;
+}
+
+/** Unique months from poDate, newest first. */
+export function listPoMonths(sales) {
+  const set = new Set();
+  for (const s of sales) {
+    const k = poMonthKey(s.poDate);
+    if (k) set.add(k);
+  }
+  return [...set].sort((a, b) => b.localeCompare(a));
+}
+
+export function filterSalesByPoMonth(sales, { seller = "all", month = "all" } = {}) {
+  return sales.filter((s) => {
+    if (seller && seller !== "all") {
+      const sn = normSeller(s.sellerName);
+      if (seller === "Sin asignar" ? sn !== "Sin asignar" : sn !== seller) return false;
+    }
+    if (month && month !== "all") {
+      if (poMonthKey(s.poDate) !== month) return false;
+    }
+    return true;
+  });
+}
+
+/** Monthly totals for one seller (by PO Date). */
+export function summarizeSellerByMonth(sales, seller) {
+  const filtered = filterSalesByPoMonth(sales, { seller, month: "all" });
+  const byMonth = {};
+  for (const s of filtered) {
+    const k = poMonthKey(s.poDate) || "sin-fecha";
+    if (!byMonth[k]) byMonth[k] = { month: k, revenue: 0, profit: 0, orders: 0 };
+    byMonth[k].revenue += s.amountUSD || 0;
+    byMonth[k].profit += s.profitUSD || 0;
+    byMonth[k].orders += 1;
+  }
+  return Object.values(byMonth)
+    .map((r) => ({
+      ...r,
+      revenue: +r.revenue.toFixed(2),
+      profit: +r.profit.toFixed(2),
+    }))
+    .sort((a, b) => {
+      if (a.month === "sin-fecha") return 1;
+      if (b.month === "sin-fecha") return -1;
+      return b.month.localeCompare(a.month);
+    });
+}
+
 export function summarizeSales(sales) {
   const total = sales.reduce((a, s) => a + (s.amountUSD || 0), 0);
   const byClient = {};

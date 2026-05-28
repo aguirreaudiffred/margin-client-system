@@ -108,14 +108,14 @@ export default function SalesPanel({ sales, setSales, salesMeta, setSalesMeta, s
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12, marginBottom: 14 }}>
         <div>
           <div className="slbl" style={{ marginBottom: 4 }}>Ventas · Reporte Notion</div>
-          <div style={{ fontSize: 8.5, color: "#3a3a4a" }}>
+          <div style={{ fontSize: 8.5, color: "var(--fx-muted)" }}>
             {salesMeta?.reportLabel ? `Último: ${salesMeta.reportLabel}` : "Sin reporte cargado"} · {sales.length} POs
             {salesMeta?.lastImport && ` · ${new Date(salesMeta.lastImport).toLocaleString("es-MX")}`}
           </div>
         </div>
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
           {PERIODS.map(([k, v]) => (
-            <button key={k} className={`ghost ${period === k ? "on" : ""}`} style={period === k ? { borderColor: "#f0a500", color: "#f0a500" } : {}} onClick={() => setPeriod(k)}>
+            <button key={k} className={`ghost ${period === k ? "on" : ""}`} onClick={() => setPeriod(k)}>
               {v}
             </button>
           ))}
@@ -200,7 +200,7 @@ export default function SalesPanel({ sales, setSales, salesMeta, setSalesMeta, s
       {view === "resumen" && (
         <>
           <div className="g4" style={{ marginBottom: 16 }}>
-            {[["HOY", fU(sum.today), "#f0a500"], ["ESTA SEMANA", fU(sum.week), "#00c896"], ["VENTA", fU(sum.total), "#d8d4c8"], ["GANANCIA EST.", `${fU(totalProfit)} · ${(profitPct * 100).toFixed(1)}%`, "#6c8dfa"]].map(([l, v, c]) => (
+            {[["HOY", fU(sum.today), "var(--fx-green)"], ["ESTA SEMANA", fU(sum.week), "var(--fx-green-dark)"], ["VENTA", fU(sum.total), "var(--fx-text)"], ["GANANCIA EST.", `${fU(totalProfit)} · ${(profitPct * 100).toFixed(1)}%`, "var(--fx-red)"]].map(([l, v, c]) => (
               <div key={l} className="card">
                 <div className="lbl">{l}</div>
                 <div style={{ fontSize: 20, color: c, marginTop: 6 }}>{v}</div>
@@ -216,7 +216,7 @@ export default function SalesPanel({ sales, setSales, salesMeta, setSalesMeta, s
                     <XAxis dataKey="day" tick={{ fill: "#3a3a4a", fontSize: 8 }} axisLine={false} tickLine={false} />
                     <YAxis hide />
                     <Tooltip formatter={(v) => fU(v)} />
-                    <Bar dataKey="revenue" fill="#f0a500" radius={[3, 3, 0, 0]} />
+                    <Bar dataKey="revenue" fill="#00843d" radius={[3, 3, 0, 0]} />
                   </BarChart>
                 </ChartShell>
               ) : (
@@ -230,7 +230,7 @@ export default function SalesPanel({ sales, setSales, salesMeta, setSalesMeta, s
                   <PieChart>
                     <Pie data={sum.categories} dataKey="revenue" nameKey="name" cx="50%" cy="50%" outerRadius={55} label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`} style={{ fontSize: 8 }}>
                       {sum.categories.map((_, i) => (
-                        <Cell key={i} fill={["#f0a500", "#00c896", "#6c8dfa", "#c084fc", "#888"][i % 5]} />
+                        <Cell key={i} fill={["#00843d", "#006b31", "#c8102e", "#5c6670", "#888"][i % 5]} />
                       ))}
                     </Pie>
                     <Tooltip formatter={(v) => fU(v)} />
@@ -265,7 +265,7 @@ export default function SalesPanel({ sales, setSales, salesMeta, setSalesMeta, s
       )}
 
       {view === "pos" && (
-        <div className="ovfl" style={{ background: "#0d0d1c", border: "1px solid #181826" }}>
+        <div className="tbl-wrap">
           <table className="tbl">
             <thead>
               <tr>
@@ -285,14 +285,14 @@ export default function SalesPanel({ sales, setSales, salesMeta, setSalesMeta, s
                 .sort((a, b) => String(b.poDate || "").localeCompare(String(a.poDate || "")))
                 .map((s) => (
                   <tr key={s.id}>
-                    <td style={{ color: "#f0a500", fontSize: 9 }}>{s.po || "—"}</td>
-                    <td style={{ color: "#444", fontSize: 9 }}>{s.poDate || "—"}</td>
+                    <td style={{ color: "var(--fx-green)", fontSize: 9, fontWeight: 600 }}>{s.po || "—"}</td>
+                    <td style={{ color: "var(--fx-muted)", fontSize: 9 }}>{s.poDate || "—"}</td>
                     <td style={{ fontSize: 10 }}>{s.client}</td>
                     <td style={{ fontSize: 10 }}>{s.sellerName || "Sin asignar"}</td>
-                    <td style={{ color: "#6c8dfa", fontSize: 9 }}>{s.productCategory || "—"}</td>
-                    <td style={{ color: "#f0a500" }}>{fU(s.amountUSD)}</td>
-                    <td style={{ color: "#555" }}>{((s.marginPct || 0) * 100).toFixed(0)}%</td>
-                    <td style={{ color: "#00c896" }}>{fU(s.profitUSD || 0)}</td>
+                    <td style={{ color: "var(--fx-green-dark)", fontSize: 9 }}>{s.productCategory || "—"}</td>
+                    <td className="stat-green">{fU(s.amountUSD)}</td>
+                    <td style={{ color: "var(--fx-muted)" }}>{((s.marginPct || 0) * 100).toFixed(0)}%</td>
+                    <td className="stat-green">{fU(s.profitUSD || 0)}</td>
                   </tr>
                 ))}
             </tbody>
@@ -301,7 +301,7 @@ export default function SalesPanel({ sales, setSales, salesMeta, setSalesMeta, s
       )}
 
       {["cliente", "vendedor", "zona", "producto"].includes(view) && (
-        <div className="ovfl" style={{ background: "#0d0d1c", border: "1px solid #181826" }}>
+        <div className="tbl-wrap">
           <table className="tbl">
             <thead>
               <tr>
