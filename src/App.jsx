@@ -1,4 +1,4 @@
-import{useState,useRef,useEffect,useCallback}from"react";
+import{useState,useRef,useEffect,useCallback,useMemo}from"react";
 import productsSeed from "./data/products.json";
 import ordersSeed from "./data/orders.json";
 import sellersSeed from "./data/sellers.json";
@@ -8,6 +8,9 @@ import{readCatalogFile,mergeCatalogImport,parseWeightsCsv}from"./lib/catalogImpo
 import salesSeedBundle from"./data/sales-seed.json";
 import SalesPanel from"./components/SalesPanel.jsx";
 import ReportesPanel from"./components/ReportesPanel.jsx";
+import MarginEditor from"./components/MarginEditor.jsx";
+import{applyMarginsToSales,loadMargins,saveMargins}from"./lib/marginConfig.js";
+import{MARGIN_LABELS,EDITABLE_MARGIN_KEYS}from"./lib/marginConfig.js";
 
 const LS={orders:"mcs_orders",products:"mcs_products",sellers:"mcs_sellers",sales:"mcs_sales",salesMeta:"mcs_sales_meta"};
 const loadLS=(key,fallback)=>{try{const r=localStorage.getItem(key);if(r)return JSON.parse(r);}catch(e){}return fallback;};
@@ -68,6 +71,8 @@ export default function App(){
   const[orders,setOrders]=useState(()=>loadLS(LS.orders,ordersSeed));
   const[sales,setSales]=useState(()=>loadLS(LS.sales,salesSeedBundle?.lines||[]));
   const[salesMeta,setSalesMeta]=useState(()=>loadLS(LS.salesMeta,salesSeedBundle?.meta||null));
+  const[margins,setMargins]=useState(()=>loadMargins());
+  const salesComputed=useMemo(()=>applyMarginsToSales(sales,margins),[sales,margins]);
   const[R,setR]=useState(null);
   const[xr,setXr]=useState(17.15);
   const[xrLoad,setXrLoad]=useState(false);
@@ -142,14 +147,15 @@ export default function App(){
   useEffect(()=>{try{localStorage.setItem(LS.orders,JSON.stringify(orders));}catch(e){}},[orders]);
   useEffect(()=>{try{localStorage.setItem(LS.sales,JSON.stringify(sales));}catch(e){}},[sales]);
   useEffect(()=>{try{localStorage.setItem(LS.salesMeta,JSON.stringify(salesMeta));}catch(e){}},[salesMeta]);
+  useEffect(()=>{saveMargins(margins);},[margins]);
 
   useEffect(()=>{
     if(cData.sellerId){const s=sellers.find(x=>x.id===cData.sellerId);if(s)setCData(d=>({...d,zone:s.zone}));}
   },[cData.sellerId]);
 
   const totalRev=orders.reduce((a,o)=>a+o.summary.totalRevenueUSD,0);
-  const salesTotal=sales.reduce((a,s)=>a+(s.amountUSD||0),0);
-  const salesProfit=sales.reduce((a,s)=>a+(s.profitUSD||0),0);
+  const salesTotal=salesComputed.reduce((a,s)=>a+(s.amountUSD||0),0);
+  const salesProfit=salesComputed.reduce((a,s)=>a+(s.profitUSD||0),0);
   const salesProfitPct=salesTotal>0?salesProfit/salesTotal:0;
   const costsN=prods.filter(p=>p.costMXN>0).length;
 
@@ -303,7 +309,7 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
             <img src={`${import.meta.env.BASE_URL}formexa-logo.svg`} alt="Formexa" />
             <div>
               <div style={{fontSize:13,fontWeight:800,color:"var(--fx-text)",lineHeight:1.2}}>Margin & Client System</div>
-              <div className="app-brand-sub">Ventas Notion · v7</div>
+              <div className="app-brand-sub">Ventas Notion · v8</div>
             </div>
           </div>
           <nav style={{display:"flex",alignItems:"stretch",flexWrap:"nowrap",overflowX:"auto",WebkitOverflowScrolling:"touch",maxWidth:"100%"}}>
@@ -325,13 +331,14 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
 
       <div style={{padding:"22px 20px",maxWidth:1300,margin:"0 auto"}}>
 
-        {tab==="ventas"&&<SalesPanel sales={sales} setSales={setSales} salesMeta={salesMeta} setSalesMeta={setSalesMeta} sellers={sellers} R={R}/>}
+        {tab==="ventas"&&<SalesPanel sales={salesComputed} setSales={setSales} salesMeta={salesMeta} setSalesMeta={setSalesMeta} sellers={sellers} R={R}/>}
 
-        {tab==="reportes"&&<ReportesPanel sales={sales} sellers={sellers}/>}
+        {tab==="reportes"&&<ReportesPanel sales={salesComputed} sellers={sellers}/>}
 
         {/* DASHBOARD */}
         {tab==="dash"&&<div className="fade">
           <div className="slbl">Dashboard · Ventas Notion</div>
+          <MarginEditor margins={margins} setMargins={setMargins} />
           <div className="g4" style={{marginBottom:18}}>
             {[["VENTAS NOTION",fU(salesTotal),"var(--fx-green)","ventas"],["GANANCIA EST.",fU(salesProfit),"var(--fx-green-dark)","ventas"],["MARGEN EST.",pct(salesProfitPct),"var(--fx-red)","ventas"],["CATÁLOGO",`${prods.length} SKUs`,"var(--fx-green)","cat"]].map(([l,v,c,t])=>(
               <div key={l} className="card" style={{cursor:"pointer"}} onClick={()=>setTab(t)}>
@@ -340,14 +347,11 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
               </div>
             ))}
           </div>
-          <div className="ni" style={{marginBottom:16,fontSize:8.5,lineHeight:1.5}}>
-            Utilidad estimada por tipo: <b>Velas 23%</b> · <b>Detergente 6%</b> · <b>Bebidas 10%</b> · <b>Mixto 15%</b>.
-          </div>
           <div className="g2" style={{marginBottom:16}}>
             <div className="card">
               <div className="lbl" style={{marginBottom:10}}>Últimos POs (Notion)</div>
-              <div style={{fontSize:9.5,color:"#555",lineHeight:1.6}}>
-                {sales.slice(0,6).map((s,i)=>(
+              <div style={{fontSize:9.5,color:"var(--fx-muted)",lineHeight:1.6}}>
+                {salesComputed.slice(0,6).map((s,i)=>(
                   <div key={s.id||i} style={{display:"flex",justifyContent:"space-between",gap:10,padding:"6px 0",borderBottom:"1px solid var(--fx-border)"}}>
                     <div style={{minWidth:0}}>
                       <div style={{fontSize:10,color:"var(--fx-text)",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{s.client}</div>
@@ -359,7 +363,7 @@ SOLO JSON: {"extractedProducts":[{"reportSku":"","reportName":"","category":"","
                     </div>
                   </div>
                 ))}
-                {!sales.length&&<div>Sube el reporte en la pestaña <b>Ventas</b>.</div>}
+                {!salesComputed.length&&<div>Sube el reporte en la pestaña <b>Ventas</b>.</div>}
               </div>
             </div>
             <div className="card">

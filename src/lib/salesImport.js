@@ -87,19 +87,10 @@ export function normProductCategory(raw) {
   return "OTRO";
 }
 
-export function marginPctForCategory(category) {
-  switch (category) {
-    case "VELAS":
-      return 0.23;
-    case "DETERGENTE":
-      return 0.06;
-    case "BEBIDAS":
-      return 0.10;
-    case "MIXTO":
-      return 0.15;
-    default:
-      return 0;
-  }
+import { marginPctDecimal, DEFAULT_MARGINS } from "./marginConfig.js";
+
+export function marginPctForCategory(category, margins) {
+  return marginPctDecimal(category, margins || DEFAULT_MARGINS);
 }
 
 export function parseAmount(v) {
@@ -146,7 +137,7 @@ function pick(row, keys) {
   return "";
 }
 
-export function parseNotionSalesRows(rows, meta = {}) {
+export function parseNotionSalesRows(rows, meta = {}, margins) {
   const lines = [];
   const errors = [];
 
@@ -170,7 +161,7 @@ export function parseNotionSalesRows(rows, meta = {}) {
     );
     const productRaw = pick(row, ["Product", "Producto", "product"]);
     const productCategory = normProductCategory(productRaw);
-    const marginPct = marginPctForCategory(productCategory);
+    const marginPct = marginPctForCategory(productCategory, margins);
     const profitUSD = amount * marginPct;
     const poDate = parseExcelDate(pick(row, ["PO Date", "Fecha PO", "po date"]));
     const deliveryDate = parseExcelDate(pick(row, ["Delivery Date", "Fecha entrega"]));

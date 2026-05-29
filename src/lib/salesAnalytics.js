@@ -12,7 +12,7 @@ export function startOfWeekISO(d = new Date()) {
   return x.toISOString().slice(0, 10);
 }
 
-export function filterSales(sales, { period = "all", from, to, seller, client, category, zone } = {}) {
+export function filterSales(sales, { period = "all", poMonth, from, to, seller, client, category, zone } = {}) {
   const today = todayISO();
   const weekStart = startOfWeekISO();
   const monthStart = today.slice(0, 7) + "-01";
@@ -25,6 +25,11 @@ export function filterSales(sales, { period = "all", from, to, seller, client, c
     if (client && client !== "all" && s.client !== client) return false;
     if (category && category !== "all" && s.productCategory !== category) return false;
     if (zone && zone !== "all" && (s.zone || "Texas") !== zone) return false;
+
+    if (poMonth && poMonth !== "all") {
+      if (poMonthKey(s.poDate) !== poMonth) return false;
+      return true;
+    }
 
     if (!s.poDate) return period === "all";
 

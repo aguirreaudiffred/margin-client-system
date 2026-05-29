@@ -1,7 +1,7 @@
 import { useState, useRef, useMemo } from "react";
 import { readNotionSalesFile, mergeSales, PRODUCT_CATEGORIES } from "../lib/salesImport.js";
 import { fetchNotionSales } from "../lib/notionSync.js";
-import { filterSales, summarizeSales } from "../lib/salesAnalytics.js";
+import { filterSales, summarizeSales, listPoMonths, formatMonthLabel } from "../lib/salesAnalytics.js";
 
 const fU = (n) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n || 0);
@@ -25,6 +25,8 @@ const VIEWS = [
 
 export default function SalesPanel({ sales, setSales, salesMeta, setSalesMeta, sellers, R }) {
   const [period, setPeriod] = useState("all");
+  const [poMonth, setPoMonth] = useState("all");
+  const availableMonths = useMemo(() => listPoMonths(sales), [sales]);
   const [view, setView] = useState("resumen");
   const [fSeller, setFSeller] = useState("all");
   const [fCat, setFCat] = useState("all");
@@ -35,8 +37,8 @@ export default function SalesPanel({ sales, setSales, salesMeta, setSalesMeta, s
   const fileRef = useRef();
 
   const filtered = useMemo(
-    () => filterSales(sales, { period, seller: fSeller, category: fCat }),
-    [sales, period, fSeller, fCat],
+    () => filterSales(sales, { period, poMonth, seller: fSeller, category: fCat }),
+    [sales, period, poMonth, fSeller, fCat],
   );
   const sum = useMemo(() => summarizeSales(filtered), [filtered]);
   const totalProfit = useMemo(() => filtered.reduce((a, s) => a + (s.profitUSD || 0), 0), [filtered]);
@@ -113,12 +115,38 @@ export default function SalesPanel({ sales, setSales, salesMeta, setSalesMeta, s
             {salesMeta?.lastImport && ` · ${new Date(salesMeta.lastImport).toLocaleString("es-MX")}`}
           </div>
         </div>
-        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", alignItems: "flex-end" }}>
           {PERIODS.map(([k, v]) => (
-            <button key={k} className={`ghost ${period === k ? "on" : ""}`} onClick={() => setPeriod(k)}>
+            <button
+              key={k}
+              className={`ghost ${period === k && poMonth === "all" ? "on" : ""}`}
+              onClick={() => {
+                setPeriod(k);
+                setPoMonth("all");
+              }}
+            >
               {v}
             </button>
           ))}
+          <div style={{ minWidth: 160 }}>
+            <div className="lbl">Mes (PO Date)</div>
+            <select
+              className="sel"
+              value={poMonth}
+              onChange={(e) => {
+                setPoMonth(e.target.value);
+                if (e.target.value !== "all") setPeriod("all");
+              }}
+              style={{ width: "100%" }}
+            >
+              <option value="all">Todos los meses</option>
+              {availableMonths.map((m) => (
+                <option key={m} value={m}>
+                  {formatMonthLabel(m)}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
@@ -132,10 +160,17 @@ export default function SalesPanel({ sales, setSales, salesMeta, setSalesMeta, s
 
       {periodEmpty && (
         <div className="ni" style={{ marginBottom: 12, fontSize: 8.5, lineHeight: 1.5 }}>
-          Hay <b>{sales.length} POs</b> cargados, pero ninguno coincide con el filtro de fecha (
-          <b>{PERIODS.find(([k]) => k === period)?.[1] || period}</b>
-          ). Prueba <button type="button" className="ghost" style={{ padding: "2px 8px", fontSize: 8 }} onClick={() => setPeriod("all")}>Todo</button> o{" "}
-          <button type="button" className="ghost" style={{ padding: "2px 8px", fontSize: 8 }} onClick={() => setPeriod("month")}>Este mes</button>.
+          Hay <b>{sales.length} POs</b> cargados, pero ninguno coincide con el filtro
+          {poMonth !== "all" ? (
+            <> de <b>{formatMonthLabel(poMonth)}</b></>
+          ) : (
+            <> (<b>{PERIODS.find(([k]) => k === period)?.[1] || period}</b>)</>
+          )}
+          . Prueba{" "}
+          <button type="button" className="ghost" style={{ padding: "2px 8px", fontSize: 8 }} onClick={() => { setPeriod("all"); setPoMonth("all"); }}>
+            Todo
+          </button>{" "}
+          o elige otro mes en el selector <b>Mes (PO Date)</b>.
         </div>
       )}
 
